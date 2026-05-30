@@ -363,3 +363,17 @@
     z-index: 4;
     pointer-events: none;
   }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    body { height: 100dvh; }
+    #splash { height: 100dvh; }
+    .brand-name { font-size: clamp(52px, 18vw, 90px); }
+    .brand-sub { letter-spacing: 6px; font-size: clamp(12px, 3vw, 16px); }
+    .stats-bar { gap: 18px; bottom: 16px; }
+    .stat-num { font-size: 18px; }
+    .stat-label { font-size: 8px; }
+    .btn-enter-inner { padding: 12px 32px; letter-spacing: 2px; }
+    .tagline-top { font-size: 9px; letter-spacing: 4px; }
+    .cursor, .cursor-trail { display: none; }
+  }

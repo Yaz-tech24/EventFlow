@@ -149,3 +149,42 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:16px;p
 @keyframes gradShift{0%,100%{background-position:0%}50%{background-position:100%}}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:0.6}}
 @keyframes countUp{from{opacity:0}to{opacity:1}}
+
+/* ── HAMBURGER / MOBILE NAV ── */
+.nav-hamburger{display:none;background:none;border:1px solid var(--border);color:rgba(255,255,255,0.6);width:36px;height:36px;cursor:pointer;font-size:18px;border-radius:4px;align-items:center;justify-content:center;flex-shrink:0;transition:border-color 0.2s}
+.nav-hamburger:hover{border-color:var(--pink);color:var(--pink)}
+.nav-mobile{display:none;position:fixed;inset:0;background:rgba(6,6,15,0.98);z-index:300;flex-direction:column;align-items:center;justify-content:center;gap:4px;backdrop-filter:blur(16px)}
+.nav-mobile.open{display:flex}
+.nm-close{position:absolute;top:18px;right:18px;background:none;border:1px solid var(--border);color:rgba(255,255,255,0.5);width:36px;height:36px;cursor:pointer;font-size:18px;border-radius:4px}
+.nm-link{padding:14px 40px;font-size:15px;letter-spacing:2px;color:rgba(255,255,255,0.55);background:none;border:none;cursor:pointer;font-family:"Outfit",sans-serif;width:100%;text-align:center;transition:color 0.2s;text-transform:uppercase}
+.nm-link:hover,.nm-link.active{color:var(--pink)}
+.nm-divider{width:40px;height:1px;background:var(--border);margin:6px 0}
+.nm-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;justify-content:center;padding:0 24px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
+  .mission-grid{grid-template-columns:1fr;gap:28px}
+  .mission-right{justify-content:flex-start}
+  .mission-card{max-width:100%}
+  .steps-grid{grid-template-columns:repeat(2,1fr)}
+  .ob-inner{grid-template-columns:1fr;gap:28px}
+  .contact-grid{grid-template-columns:1fr;gap:28px}
+  .stats-band{flex-wrap:wrap}
+  .stat-item{padding:8px 20px}
+  .stat-sep{display:none}
+}
+
+@media(max-width:600px){
+  nav{padding:0 14px}
+  .hero{padding:0 14px;min-height:auto}
+  .hero-inner{padding:28px 0 24px}
+  .section{padding:36px 14px}
+  .org-banner{padding:36px 14px}
+  .page-footer{padding:20px 14px;flex-direction:column;align-items:flex-start;gap:10px}
+  .steps-grid{grid-template-columns:1fr}
+  .cf-row{grid-template-columns:1fr}
+  .contact-form{padding:20px 16px}
+  .footer-copy{display:none}
+}

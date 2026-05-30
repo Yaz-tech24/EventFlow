@@ -704,3 +704,20 @@
           background-position: 100%;
         }
       }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 768px) {
+        body { overflow-y: auto; min-height: 100dvh; }
+        #app { flex-direction: column; min-height: 100dvh; overflow: visible; }
+        .left-panel { display: none; }
+        .right-panel { flex: 1; padding: 24px 20px 40px; width: 100%; }
+        .auth-card { padding: 28px 20px; }
+      }
+
+      @media (max-width: 420px) {
+        .right-panel { padding: 20px 14px 36px; }
+        .auth-card { padding: 24px 16px; }
+        .role-select-grid { grid-template-columns: 1fr 1fr; }
+        .social-row { grid-template-columns: 1fr; }
+        .tabs { gap: 0; }
+      }

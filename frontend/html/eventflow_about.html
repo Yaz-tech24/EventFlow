@@ -27,7 +27,21 @@
     <button class="nav-btn btn-ghost" onclick="window.location.href='eventflow_login_register.html'">Entrar</button>
     <button class="nav-btn btn-primary" onclick="window.location.href='eventflow_events.html'">Explorar</button>
   </div>
+  <button class="nav-hamburger" onclick="document.getElementById('navMobile').classList.add('open')" aria-label="Menu">☰</button>
 </nav>
+<div class="nav-mobile" id="navMobile">
+  <button class="nm-close" onclick="document.getElementById('navMobile').classList.remove('open')" aria-label="Fechar">✕</button>
+  <button class="nm-link" onclick="window.location.href='eventflow_homepage.html'">Início</button>
+  <button class="nm-link" onclick="window.location.href='eventflow_events.html'">Eventos</button>
+  <button class="nm-link" onclick="window.location.href='eventflow_categories.html'">Categorias</button>
+  <button class="nm-link" onclick="window.location.href='eventflow_organizers.html'">Organizadores</button>
+  <button class="nm-link active">Sobre</button>
+  <div class="nm-divider"></div>
+  <div class="nm-actions">
+    <button class="nav-btn btn-ghost" onclick="window.location.href='eventflow_login_register.html'">Entrar</button>
+    <button class="nav-btn btn-primary" onclick="window.location.href='eventflow_events.html'">Explorar</button>
+  </div>
+</div>
 
 <!-- HERO -->
 <div class="hero">
