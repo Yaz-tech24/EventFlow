@@ -2,7 +2,10 @@ const Database = require('better-sqlite3');
 const path = require('path');
 const fs   = require('fs');
 
-const db = new Database(path.join(__dirname, 'eventflow.db'));
+const dbPath = process.env.NODE_ENV === 'production'
+  ? '/data/eventflow.db'
+  : path.join(__dirname, 'eventflow.db');
+const db = new Database(dbPath);
 
 // Performance settings
 db.pragma('journal_mode = WAL');
