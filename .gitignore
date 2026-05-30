@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+.env
+*.sqlite
+.gitkeep
+# Environment variables
+.env
+backend/.env
+
+# Database (generated at runtime)
+backend/eventflow.db
+backend/eventflow.db-shm
+backend/eventflow.db-wal
+
+# Uploaded files (keep folder, ignore contents)
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+*.swp
+*.swo
+
+# Build / Cache
+dist/
+.cache/
+

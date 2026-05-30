@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EventFlow — Sobre Nós</title>
+<link rel="stylesheet" href="../css/eventflow_about.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="eventflow_homepage.html">
+    <div class="nav-logo">🎪</div>
+    <div class="nav-name">EVENTFLOW</div>
+  </a>
+  <div class="nav-links">
+    <button class="nav-link" onclick="window.location.href='eventflow_homepage.html'">Início</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_events.html'">Eventos</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_categories.html'">Categorias</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_organizers.html'">Organizadores</button>
+    <button class="nav-link active">Sobre</button>
+  </div>
+  <div class="nav-right">
+    <button class="notif-btn" onclick="window.location.href='eventflow_notifications.html'">🔔<span class="notif-dot"></span></button>
+    <button class="nav-btn btn-ghost" onclick="window.location.href='eventflow_login_register.html'">Entrar</button>
+    <button class="nav-btn btn-primary" onclick="window.location.href='eventflow_events.html'">Explorar</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <canvas id="bg" class="hero-canvas"></canvas>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="hero-badge-dot"></span>Desde 2021 · Moçambique</div>
+    <div class="hero-title">A PLATAFORMA QUE<br>CONECTA PESSOAS<br><span class="grad">A EXPERIÊNCIAS</span></div>
+    <div class="hero-sub">A EventFlow nasceu com um propósito simples: tornar mais fácil descobrir, partilhar e vivenciar os melhores eventos de Moçambique.</div>
+    <div class="hero-actions">
+      <button class="ha-btn ha-primary" onclick="window.location.href='eventflow_events.html'">Explorar Eventos</button>
+      <button class="ha-btn ha-secondary" onclick="document.getElementById('howItWorks').scrollIntoView({behavior:'smooth'})">Como Funciona</button>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stat-item"><div class="stat-num" data-target="247">0</div><div class="stat-lbl">Eventos Ativos</div></div>
+  <div class="stat-sep"></div>
+  <div class="stat-item"><div class="stat-num" data-target="12000">0</div><div class="stat-lbl">Bilhetes Vendidos</div></div>
+  <div class="stat-sep"></div>
+  <div class="stat-item"><div class="stat-num" data-target="58">0</div><div class="stat-lbl">Organizadores</div></div>
+  <div class="stat-sep"></div>
+  <div class="stat-item"><div class="stat-num" data-target="49" data-suffix="★">0</div><div class="stat-lbl">Avaliação Média</div></div>
+  <div class="stat-sep"></div>
+  <div class="stat-item"><div class="stat-num" data-target="5">0</div><div class="stat-lbl">Anos de Operação</div></div>
+</div>
+
+<!-- MISSION -->
+<div class="section mission-section">
+  <div class="mission-grid">
+    <div class="mission-left">
+      <div class="section-tag">MISSÃO</div>
+      <div class="section-title">POR QUE EXISTE A<br><span>EVENTFLOW?</span></div>
+      <div class="mission-text">
+        <p>Moçambique tem uma cena cultural vibrante e crescente, mas por muito tempo faltou uma plataforma centralizada que ajudasse tanto os organizadores a chegar ao seu público como os participantes a descobrir o que está a acontecer.</p>
+        <p>A EventFlow resolve esse problema criando o espaço digital onde eventos ganham vida — desde a divulgação até à compra de bilhetes, passando pela gestão completa do evento.</p>
+      </div>
+      <div class="mission-values">
+        <div class="mv-item"><span class="mv-icon">🎯</span><div><div class="mv-name">Simplicidade</div><div class="mv-desc">Compra o teu bilhete em menos de 60 segundos</div></div></div>
+        <div class="mv-item"><span class="mv-icon">🔒</span><div><div class="mv-name">Segurança</div><div class="mv-desc">Pagamentos protegidos e bilhetes verificados</div></div></div>
+        <div class="mv-item"><span class="mv-icon">🌍</span><div><div class="mv-name">Comunidade</div><div class="mv-desc">Conectando Moçambicanos através de experiências</div></div></div>
+      </div>
+    </div>
+    <div class="mission-right">
+      <div class="mission-card">
+        <div class="mc-emoji">🎪</div>
+        <div class="mc-quote">"A nossa visão é que qualquer moçambicano possa descobrir e participar em eventos incríveis com apenas alguns toques no telefone."</div>
+        <div class="mc-author">— Equipa EventFlow</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="section hiw-section" id="howItWorks">
+  <div class="section-header">
+    <div class="section-tag">PROCESSO</div>
+    <div class="section-title">COMO <span>FUNCIONA?</span></div>
+    <div class="section-sub">Três passos simples para a tua próxima experiência</div>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <div class="step-icon">🔍</div>
+      <div class="step-name">Descobre</div>
+      <div class="step-desc">Explora centenas de eventos por categoria, data ou localização. Usa os filtros para encontrar o que é perfeito para ti.</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <div class="step-icon">🎟️</div>
+      <div class="step-name">Reserva</div>
+      <div class="step-desc">Escolhe o teu tipo de bilhete e compra de forma segura com cartão, M-Pesa ou ATM. Recebes a confirmação imediatamente.</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <div class="step-icon">🎉</div>
+      <div class="step-name">Vive</div>
+      <div class="step-desc">Apresenta o teu QR code na entrada e curte o evento. Simples, rápido e sem filas.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOR ORGANIZERS -->
+<div class="section org-section">
+  <div class="org-banner">
+    <canvas id="bgOrg" class="org-canvas"></canvas>
+    <div class="ob-inner">
+      <div class="ob-left">
+        <div class="section-tag" style="color:var(--purple)">PARA ORGANIZADORES</div>
+        <div class="section-title">CRIA, GERE E<br><span>MONETIZA</span></div>
+        <div class="ob-desc">Tudo o que precisas para levar o teu evento ao próximo nível. Dashboard completo, analytics em tempo real e pagamentos automáticos.</div>
+        <button class="ha-btn ha-primary" onclick="window.location.href='eventflow_login_register.html'" style="margin-top:20px">Criar Conta Gratuita →</button>
+      </div>
+      <div class="ob-right">
+        <div class="ob-features">
+          <div class="ob-feat"><span class="obf-icon">📊</span><div><div class="obf-name">Dashboard Analítico</div><div class="obf-desc">Métricas em tempo real sobre vendas e audiência</div></div></div>
+          <div class="ob-feat"><span class="obf-icon">💳</span><div><div class="obf-name">Pagamentos Integrados</div><div class="obf-desc">M-Pesa, cartão e ATM — recebimentos automáticos</div></div></div>
+          <div class="ob-feat"><span class="obf-icon">🎟️</span><div><div class="obf-name">Gestão de Bilhetes</div><div class="obf-desc">Múltiplos tipos, descontos e controlo de capacidade</div></div></div>
+          <div class="ob-feat"><span class="obf-icon">📣</span><div><div class="obf-name">Promoção Automática</div><div class="obf-desc">Os teus eventos chegam a milhares de utilizadores</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TEAM -->
+<div class="section team-section">
+  <div class="section-header">
+    <div class="section-tag">EQUIPA</div>
+    <div class="section-title">QUEM ESTÁ POR<br><span>DETRÁS?</span></div>
+  </div>
+  <div class="team-grid" id="teamGrid"></div>
+</div>
+
+<!-- FAQ -->
+<div class="section faq-section">
+  <div class="section-header">
+    <div class="section-tag">FAQ</div>
+    <div class="section-title">PERGUNTAS<br><span>FREQUENTES</span></div>
+  </div>
+  <div class="faq-list" id="faqList"></div>
+</div>
+
+<!-- CONTACT -->
+<div class="section contact-section" id="contactSection">
+  <div class="contact-grid">
+    <div class="contact-left">
+      <div class="section-tag">CONTACTO</div>
+      <div class="section-title">FALA <span>CONNOSCO</span></div>
+      <div class="contact-desc">Tens dúvidas, sugestões ou precisas de ajuda? A nossa equipa está disponível 24/7.</div>
+      <div class="contact-methods">
+        <div class="contact-method"><span class="cm-icon">📧</span><div><div class="cm-label">Email</div><div class="cm-value">suporte@eventflow.co.mz</div></div></div>
+        <div class="contact-method"><span class="cm-icon">📱</span><div><div class="cm-label">WhatsApp / M-Pesa</div><div class="cm-value">+258 84 000 0000</div></div></div>
+        <div class="contact-method"><span class="cm-icon">📍</span><div><div class="cm-label">Localização</div><div class="cm-value">Av. Julius Nyerere, Maputo</div></div></div>
+      </div>
+    </div>
+    <div class="contact-right">
+      <div class="contact-form">
+        <div class="cf-row">
+          <div class="cf-group">
+            <label class="cf-label">Nome</label>
+            <input class="cf-input" type="text" id="cf-name" placeholder="O teu nome">
+          </div>
+          <div class="cf-group">
+            <label class="cf-label">Email</label>
+            <input class="cf-input" type="email" id="cf-email" placeholder="O teu email">
+          </div>
+        </div>
+        <div class="cf-group">
+          <label class="cf-label">Assunto</label>
+          <select class="cf-input" id="cf-subject">
+            <option>Suporte técnico</option>
+            <option>Questão sobre bilhetes</option>
+            <option>Tornar-me organizador</option>
+            <option>Parceria</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="cf-group">
+          <label class="cf-label">Mensagem</label>
+          <textarea class="cf-input cf-textarea" id="cf-message" placeholder="Descreve o teu pedido..."></textarea>
+        </div>
+        <button class="cf-submit" onclick="submitContact(this)">ENVIAR MENSAGEM →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+  <div class="footer-brand">EVENTFLOW</div>
+  <div class="footer-links">
+    <button class="footer-link" onclick="window.location.href='eventflow_terms.html'">Termos</button>
+    <button class="footer-link" onclick="window.location.href='eventflow_privacy.html'">Privacidade</button>
+    <button class="footer-link" onclick="document.getElementById('contactSection')?.scrollIntoView({behavior:'smooth'})">Contacto</button>
+    <button class="footer-link" onclick="alert('Documentação API disponível em breve')">API</button>
+  </div>
+  <div class="footer-copy">© 2026 EventFlow · Moçambique</div>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/eventflow_about.js"></script>
+</body>
+</html>

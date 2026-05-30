@@ -1,0 +1,12 @@
+{
+  "name": "eventflow",
+  "version": "1.0.0",
+  "description": "Plataforma de eventos de Mocambique — Trabalho Semestral TI",
+  "scripts": {
+    "install:backend": "cd backend && npm install",
+    "seed": "cd backend && npm run seed",
+    "start": "cd backend && npm start",
+    "dev": "cd backend && npm run dev"
+  },
+  "private": true
+}

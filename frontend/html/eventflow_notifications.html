@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EventFlow — Notificações</title>
+<link rel="stylesheet" href="../css/eventflow_notifications.css">
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="eventflow_homepage.html">
+    <div class="nav-logo">🎪</div>
+    <div class="nav-name">EVENTFLOW</div>
+  </a>
+  <div class="nav-links">
+    <button class="nav-link" onclick="window.location.href='eventflow_homepage.html'">Início</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_events.html'">Eventos</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_categories.html'">Categorias</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_organizers.html'">Organizadores</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_about.html'">Sobre</button>
+  </div>
+  <div class="nav-right">
+    <button class="notif-btn active-page">🔔</button>
+    <div class="nav-avatar" onclick="window.location.href='eventflow_profile.html'">CF</div>
+  </div>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<div class="page-wrap">
+  <div class="page-header">
+    <div class="ph-left">
+      <div class="ph-title">Notificações</div>
+      <div class="ph-sub" id="unreadCount">— novas notificações</div>
+    </div>
+    <div class="ph-actions">
+      <button class="ph-btn" onclick="markAllRead()">✓ Marcar todas como lidas</button>
+      <button class="ph-btn danger" onclick="clearAll()">🗑 Limpar tudo</button>
+    </div>
+  </div>
+
+  <div class="notif-layout">
+    <!-- FILTER TABS -->
+    <div class="filter-tabs">
+      <button class="ft-btn active" data-ft="todas" onclick="filterNotifs('todas',this)">Todas</button>
+      <button class="ft-btn" data-ft="eventos" onclick="filterNotifs('eventos',this)">Eventos</button>
+      <button class="ft-btn" data-ft="bilhetes" onclick="filterNotifs('bilhetes',this)">Bilhetes</button>
+      <button class="ft-btn" data-ft="sistema" onclick="filterNotifs('sistema',this)">Sistema</button>
+    </div>
+
+    <!-- NOTIFICATIONS LIST -->
+    <div class="notif-list" id="notifList"></div>
+  </div>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/eventflow_notifications.js"></script>
+</body>
+</html>

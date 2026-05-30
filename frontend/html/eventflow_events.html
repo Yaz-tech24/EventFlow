@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EventFlow — Explorar Eventos</title>
+<link rel="stylesheet" href="../css/eventflow_events.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="eventflow_homepage.html">
+    <div class="nav-logo">🎪</div>
+    <div class="nav-name">EVENTFLOW</div>
+  </a>
+  <div class="nav-links">
+    <button class="nav-link" onclick="window.location.href='eventflow_homepage.html'">Início</button>
+    <button class="nav-link active">Eventos</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_categories.html'">Categorias</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_organizers.html'">Organizadores</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_about.html'">Sobre</button>
+  </div>
+  <div class="nav-right">
+    <button class="notif-btn" onclick="window.location.href='eventflow_notifications.html'">🔔<span class="notif-dot"></span></button>
+    <button class="nav-btn btn-ghost" onclick="window.location.href='eventflow_login_register.html'">Entrar</button>
+    <button class="nav-btn btn-primary" onclick="window.location.href='eventflow_login_register.html'">Registo</button>
+  </div>
+</nav>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="ph-inner">
+    <div class="ph-left">
+      <div class="ph-title">EVENTOS</div>
+      <div class="ph-sub" id="resultsCount">A carregar eventos...</div>
+    </div>
+    <div class="ph-search-wrap">
+      <span class="ps-icon">🔍</span>
+      <input class="ph-search" id="searchInput" type="text" placeholder="Pesquisar eventos, artistas, locais...">
+      <button class="ps-clear hidden" id="clearSearch" onclick="clearSearch()">✕</button>
+    </div>
+  </div>
+</div>
+
+<!-- ACTIVE FILTERS BAR -->
+<div class="active-filters" id="activeFilters" style="display:none">
+  <div class="af-inner">
+    <span class="af-lbl">Filtros activos:</span>
+    <div class="af-chips" id="filterChips"></div>
+    <button class="af-clear" onclick="clearAllFilters()">Limpar tudo</button>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="page-body">
+
+  <!-- SIDEBAR FILTERS -->
+  <aside class="filters-sidebar" id="filtersSidebar">
+    <div class="fs-header">
+      <div class="fs-title">FILTROS</div>
+      <button class="fs-reset" onclick="clearAllFilters()">Limpar</button>
+    </div>
+
+    <!-- Category -->
+    <div class="filter-group">
+      <div class="fg-title">CATEGORIA</div>
+      <div class="fg-options" id="catOptions">
+        <label class="fo-item"><input type="checkbox" value="musica" onchange="applyFilters()"><span class="fo-emoji">🎵</span>Música</label>
+        <label class="fo-item"><input type="checkbox" value="arte" onchange="applyFilters()"><span class="fo-emoji">🎨</span>Arte & Cultura</label>
+        <label class="fo-item"><input type="checkbox" value="tech" onchange="applyFilters()"><span class="fo-emoji">💡</span>Tecnologia</label>
+        <label class="fo-item"><input type="checkbox" value="desporto" onchange="applyFilters()"><span class="fo-emoji">🏃</span>Desporto</label>
+        <label class="fo-item"><input type="checkbox" value="teatro" onchange="applyFilters()"><span class="fo-emoji">🎭</span>Teatro & Dança</label>
+        <label class="fo-item"><input type="checkbox" value="gastronomia" onchange="applyFilters()"><span class="fo-emoji">🍽️</span>Gastronomia</label>
+        <label class="fo-item"><input type="checkbox" value="workshops" onchange="applyFilters()"><span class="fo-emoji">🛠️</span>Workshops</label>
+        <label class="fo-item"><input type="checkbox" value="cinema" onchange="applyFilters()"><span class="fo-emoji">🎬</span>Cinema</label>
+        <label class="fo-item"><input type="checkbox" value="negocios" onchange="applyFilters()"><span class="fo-emoji">💼</span>Negócios</label>
+        <label class="fo-item"><input type="checkbox" value="musica_gospel" onchange="applyFilters()"><span class="fo-emoji">🎤</span>Gospel & Coral</label>
+      </div>
+    </div>
+
+    <!-- City -->
+    <div class="filter-group">
+      <div class="fg-title">CIDADE</div>
+      <div class="fg-options">
+        <label class="fo-item"><input type="checkbox" value="Maputo" onchange="applyFilters()"><span class="fo-emoji">🏙️</span>Maputo</label>
+        <label class="fo-item"><input type="checkbox" value="Matola" onchange="applyFilters()"><span class="fo-emoji">🌆</span>Matola</label>
+        <label class="fo-item"><input type="checkbox" value="Beira" onchange="applyFilters()"><span class="fo-emoji">🌇</span>Beira</label>
+        <label class="fo-item"><input type="checkbox" value="Nampula" onchange="applyFilters()"><span class="fo-emoji">🌄</span>Nampula</label>
+        <label class="fo-item"><input type="checkbox" value="Inhambane" onchange="applyFilters()"><span class="fo-emoji">🏖️</span>Inhambane</label>
+        <label class="fo-item"><input type="checkbox" value="Pemba" onchange="applyFilters()"><span class="fo-emoji">🌊</span>Pemba</label>
+      </div>
+    </div>
+
+    <!-- Date -->
+    <div class="filter-group">
+      <div class="fg-title">DATA</div>
+      <div class="date-btns">
+        <button class="db-btn active" data-period="todos" onclick="selectPeriod(this)">Todos</button>
+        <button class="db-btn" data-period="semana" onclick="selectPeriod(this)">Esta semana</button>
+        <button class="db-btn" data-period="mes" onclick="selectPeriod(this)">Este mês</button>
+        <button class="db-btn" data-period="3meses" onclick="selectPeriod(this)">Próx. 3 meses</button>
+      </div>
+    </div>
+
+    <!-- Price -->
+    <div class="filter-group">
+      <div class="fg-title">PREÇO</div>
+      <div class="price-range">
+        <div class="pr-inputs">
+          <div class="pr-group"><label class="pr-lbl">Mín (MT)</label><input class="pr-input" id="priceMin" type="number" min="0" placeholder="0" oninput="applyFilters()"></div>
+          <div class="pr-sep">—</div>
+          <div class="pr-group"><label class="pr-lbl">Máx (MT)</label><input class="pr-input" id="priceMax" type="number" min="0" placeholder="∞" oninput="applyFilters()"></div>
+        </div>
+      </div>
+      <label class="fo-item free-only" style="margin-top:10px">
+        <input type="checkbox" id="freeOnly" onchange="applyFilters()">
+        <span class="fo-emoji">🎁</span>Apenas Gratuitos
+      </label>
+    </div>
+
+    <!-- Spots -->
+    <div class="filter-group">
+      <div class="fg-title">DISPONIBILIDADE</div>
+      <label class="fo-item"><input type="checkbox" id="hasSpots" onchange="applyFilters()"><span class="fo-emoji">✅</span>Com lugares disponíveis</label>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+
+    <!-- SORT BAR -->
+    <div class="sort-bar">
+      <div class="sb-count" id="sortCount"></div>
+      <div class="sb-right">
+        <div class="view-btns">
+          <button class="vb-btn active" id="vbGrid" onclick="setView('grid',this)" title="Grelha">⊞</button>
+          <button class="vb-btn" id="vbList" onclick="setView('list',this)" title="Lista">≡</button>
+        </div>
+        <select class="sort-select" id="sortSelect" onchange="applyFilters()">
+          <option value="default">Relevância</option>
+          <option value="date-asc">Data ↑ (mais próximos)</option>
+          <option value="price-asc">Preço ↑ (mais barato)</option>
+          <option value="price-desc">Preço ↓ (mais caro)</option>
+          <option value="spots-desc">Mais lugares</option>
+          <option value="az">A → Z</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- EVENTS GRID -->
+    <div class="events-grid" id="eventsGrid"></div>
+
+    <!-- EMPTY STATE -->
+    <div class="empty-state hidden" id="emptyState">
+      <div class="es-icon">🔍</div>
+      <div class="es-title">Nenhum evento encontrado</div>
+      <div class="es-sub">Tenta ajustar os filtros ou pesquisar outro termo</div>
+      <button class="es-btn" onclick="clearAllFilters()">Limpar filtros</button>
+    </div>
+
+    <!-- LOAD MORE -->
+    <div class="load-more-wrap" id="loadMoreWrap">
+      <button class="load-more-btn" id="loadMoreBtn" onclick="loadMore()">Carregar mais eventos</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- MOBILE FILTER TOGGLE -->
+<button class="mobile-filter-btn" onclick="toggleMobileFilters()">⚙ Filtros</button>
+
+<script src="../js/api.js"></script>
+<script src="../js/eventflow_events.js"></script>
+</body>
+</html>

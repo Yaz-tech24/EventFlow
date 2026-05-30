@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;900&display=swap");
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--pink:#ff3cac;--purple:#784ba0;--blue:#2b86c5;--bg:#06060f;--card:#0d0d1a;--border:rgba(255,255,255,0.07)}
+body{background:var(--bg);font-family:"Outfit",sans-serif;color:#fff;overflow-x:hidden;min-height:100vh}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:16px;padding:0 28px;height:58px;background:rgba(6,6,15,0.92);border-bottom:1px solid var(--border);backdrop-filter:blur(16px)}
+.nav-brand{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0}
+.nav-logo{width:28px;height:28px;background:rgba(255,60,172,0.15);border:1px solid rgba(255,60,172,0.4);display:flex;align-items:center;justify-content:center;font-size:14px;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.nav-name{font-family:"Bebas Neue",sans-serif;font-size:20px;letter-spacing:3px;background:linear-gradient(90deg,#ff3cac,#784ba0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:2px;flex:1;justify-content:center}
+.nav-link{padding:6px 14px;font-size:12px;letter-spacing:1px;color:rgba(255,255,255,0.45);background:none;border:none;cursor:pointer;font-family:"Outfit",sans-serif;transition:color 0.2s;border-radius:4px}
+.nav-link:hover,.nav-link.active{color:#fff;background:rgba(255,255,255,0.05)}
+.nav-link.active{color:var(--pink)}
+.nav-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.nav-btn{padding:7px 18px;font-size:11px;font-weight:600;letter-spacing:2px;font-family:"Outfit",sans-serif;cursor:pointer;transition:all 0.2s;border-radius:2px}
+.btn-ghost{background:none;border:1px solid var(--border);color:rgba(255,255,255,0.5)}
+.btn-ghost:hover{border-color:var(--pink);color:var(--pink)}
+.btn-primary{background:linear-gradient(135deg,var(--pink),var(--purple));border:none;color:#fff;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.btn-primary:hover{box-shadow:0 0 20px rgba(255,60,172,0.4)}
+.notif-btn{position:relative;background:none;border:1px solid var(--border);color:rgba(255,255,255,0.5);width:34px;height:34px;cursor:pointer;font-size:16px;border-radius:4px;transition:all 0.2s}
+.notif-btn:hover{border-color:var(--pink);color:#fff}
+.notif-dot{position:absolute;top:4px;right:4px;width:7px;height:7px;background:var(--pink);border-radius:50%;border:1px solid var(--bg)}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;padding:0 28px;background:linear-gradient(180deg,#06060f 0%,#0a0a18 100%)}
+.hero-canvas{position:absolute;inset:0;z-index:0}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,60,172,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,60,172,0.025) 1px,transparent 1px);background-size:50px 50px;z-index:1}
+.hero-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;padding:48px 0 40px;max-width:600px}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border:1px solid rgba(255,60,172,0.3);background:rgba(255,60,172,0.07);font-size:10px;letter-spacing:3px;color:var(--pink);text-transform:uppercase;margin-bottom:16px;animation:fadeUp 0.6s ease both}
+.hero-badge-dot{width:6px;height:6px;background:var(--pink);border-radius:50%;animation:pulse 1.5s ease infinite}
+.hero-title{font-family:"Bebas Neue",sans-serif;font-size:clamp(48px,7vw,72px);line-height:0.92;letter-spacing:2px;margin-bottom:16px;animation:fadeUp 0.6s ease 0.15s both}
+.hero-title .grad{background:linear-gradient(135deg,#ff3cac,#784ba0,#2b86c5);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradShift 4s ease infinite}
+.hero-sub{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7;margin-bottom:28px;animation:fadeUp 0.6s ease 0.3s both}
+.hero-search{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.04);border:1px solid var(--border);padding:10px 16px;width:100%;max-width:440px;animation:fadeUp 0.6s ease 0.45s both}
+.hs-icon{font-size:16px;opacity:0.5}
+.hs-input{background:none;border:none;color:#fff;font-family:"Outfit",sans-serif;font-size:13px;outline:none;flex:1}
+.hs-input::placeholder{color:rgba(255,255,255,0.25)}
+
+/* STATS BAR */
+.stats-bar{display:flex;align-items:center;justify-content:center;gap:0;padding:16px 28px;background:var(--card);border-bottom:1px solid var(--border)}
+.sb-item{display:flex;flex-direction:column;align-items:center;padding:0 32px}
+.sb-num{font-family:"Bebas Neue",sans-serif;font-size:22px;color:var(--pink)}
+.sb-lbl{font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-top:2px}
+.sb-sep{width:1px;height:36px;background:var(--border)}
+
+/* SECTIONS */
+.section{padding:36px 28px}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.section-title{font-family:"Bebas Neue",sans-serif;font-size:28px;letter-spacing:3px;color:rgba(255,255,255,0.85)}
+.section-title span{color:var(--pink)}
+.section-count{font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.25);text-transform:uppercase}
+.section-link{background:none;border:none;color:rgba(255,255,255,0.35);font-size:11px;letter-spacing:1px;cursor:pointer;font-family:"Outfit",sans-serif;transition:color 0.2s}
+.section-link:hover{color:var(--pink)}
+
+/* CATEGORIES GRID */
+.categories-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.cat-card{background:var(--card);border:1px solid var(--border);padding:24px;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden;animation:fadeUp 0.5s ease both}
+.cat-card:hover{border-color:var(--cat-color,var(--pink));transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.cat-card::before{content:'';position:absolute;inset:0;background:var(--cat-color,var(--pink));opacity:0;transition:opacity 0.3s}
+.cat-card:hover::before{opacity:0.04}
+.cat-corner{position:absolute;top:0;right:0;width:40px;height:40px;overflow:hidden}
+.cat-corner::after{content:'';position:absolute;top:-20px;right:-20px;width:40px;height:40px;background:var(--cat-color,var(--pink));opacity:0.15;transform:rotate(45deg)}
+.cat-emoji{font-size:36px;margin-bottom:14px;display:block}
+.cat-name{font-family:"Bebas Neue",sans-serif;font-size:20px;letter-spacing:2px;margin-bottom:4px}
+.cat-desc{font-size:11px;color:rgba(255,255,255,0.35);margin-bottom:16px;line-height:1.5}
+.cat-footer{display:flex;align-items:center;justify-content:space-between}
+.cat-count{font-size:11px;color:var(--cat-color,var(--pink));font-weight:600;letter-spacing:1px}
+.cat-arrow{width:24px;height:24px;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:12px;color:rgba(255,255,255,0.3);transition:all 0.2s}
+.cat-card:hover .cat-arrow{border-color:var(--cat-color,var(--pink));color:var(--cat-color,var(--pink))}
+.cat-bar{height:2px;background:rgba(255,255,255,0.06);margin-bottom:16px;overflow:hidden}
+.cat-bar-fill{height:100%;background:var(--cat-color,var(--pink));transition:width 1s ease 0.3s}
+
+/* FEATURED */
+.featured-section{background:rgba(255,255,255,0.01);border-top:1px solid var(--border)}
+.featured-cats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.feat-cat-card{background:var(--card);border:1px solid var(--border);padding:28px;position:relative;overflow:hidden}
+.fcc-tag{font-size:9px;letter-spacing:3px;color:var(--pink);text-transform:uppercase;margin-bottom:10px}
+.fcc-emoji{font-size:48px;position:absolute;right:24px;top:50%;transform:translateY(-50%);opacity:0.15}
+.fcc-title{font-family:"Bebas Neue",sans-serif;font-size:26px;letter-spacing:2px;margin-bottom:8px}
+.fcc-sub{font-size:12px;color:rgba(255,255,255,0.35);margin-bottom:20px;line-height:1.5}
+.fcc-events{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.fcc-event{display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(255,255,255,0.03);border:1px solid var(--border)}
+.fcc-event-emoji{font-size:18px}
+.fcc-event-info{flex:1;min-width:0}
+.fcc-event-name{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fcc-event-date{font-size:10px;color:rgba(255,255,255,0.3);margin-top:1px}
+.fcc-event-price{font-size:11px;color:var(--pink);font-weight:700;flex-shrink:0}
+.fcc-btn{padding:10px 20px;background:linear-gradient(135deg,var(--pink),var(--purple));border:none;color:#fff;font-family:"Outfit",sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;cursor:pointer;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);transition:box-shadow 0.2s}
+.fcc-btn:hover{box-shadow:0 0 20px rgba(255,60,172,0.4)}
+
+/* FOOTER */
+.page-footer{padding:24px 28px;border-top:1px solid var(--border);display:flex;align-items:center;gap:24px}
+.footer-brand{font-family:"Bebas Neue",sans-serif;font-size:16px;letter-spacing:4px;color:rgba(255,255,255,0.2);flex-shrink:0}
+.footer-links{display:flex;gap:4px;flex:1;justify-content:center;flex-wrap:wrap}
+.footer-link{background:none;border:none;color:rgba(255,255,255,0.25);font-size:11px;cursor:pointer;font-family:"Outfit",sans-serif;padding:4px 8px;transition:color 0.2s;letter-spacing:1px}
+.footer-link:hover{color:var(--pink)}
+.footer-copy{font-size:10px;color:rgba(255,255,255,0.15);flex-shrink:0}
+
+/* HIDDEN */
+.cat-card.hidden{display:none}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes gradShift{0%,100%{background-position:0%}50%{background-position:100%}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:0.6}}

@@ -1,0 +1,203 @@
+﻿<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+<link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventFlow — Descobre os Melhores Eventos de Moçambique</title>
+    <link rel="stylesheet" href="../css/eventflow_homepage.css" />
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <a class="nav-brand" href="eventflow_homepage.html">
+        <div class="nav-logo">🎪</div>
+        <div class="nav-name">EVENTFLOW</div>
+      </a>
+      <div class="nav-links">
+        <button class="nav-link active">Início</button>
+        <button class="nav-link" onclick="window.location.href='eventflow_events.html'">Eventos</button>
+        <button class="nav-link" onclick="window.location.href='eventflow_categories.html'">Categorias</button>
+        <button class="nav-link" onclick="window.location.href='eventflow_organizers.html'">Organizadores</button>
+        <button class="nav-link" onclick="window.location.href='eventflow_about.html'">Sobre</button>
+      </div>
+      <div class="nav-right">
+        <button class="notif-btn" onclick="window.location.href='eventflow_notifications.html'">🔔<span class="notif-dot"></span></button>
+        <button class="nav-btn btn-ghost" onclick="window.location.href='eventflow_login_register.html'">Entrar</button>
+        <button class="nav-btn btn-primary" onclick="goEvents()">
+          Explorar
+        </button>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+      <canvas id="bg" class="hero-canvas"></canvas>
+      <div class="hero-grid"></div>
+      <div class="hero-inner">
+        <div class="hero-left">
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>Plataforma #1 de Eventos em
+            Moçambique
+          </div>
+          <div class="hero-title">
+            DESCOBRE<br />OS MELHORES<br /><span class="grad">EVENTOS</span>
+          </div>
+          <div class="hero-sub">
+            Música, arte, cultura, gastronomia e muito mais. Encontra o evento
+            perfeito para ti e compra o teu bilhete em segundos.
+          </div>
+          <div class="hero-actions">
+            <button class="ha-btn ha-primary" onclick="goEvents()">
+              Explorar Eventos
+            </button>
+            <button class="ha-btn ha-secondary" onclick="window.location.href='eventflow_about.html'">Como Funciona</button>
+          </div>
+          <div class="hero-stats">
+            <div class="hs-item">
+              <div class="hs-num">247</div>
+              <div class="hs-lbl">Eventos Ativos</div>
+            </div>
+            <div class="hs-item">
+              <div class="hs-num">12K+</div>
+              <div class="hs-lbl">Bilhetes Vendidos</div>
+            </div>
+            <div class="hs-item">
+              <div class="hs-num">58</div>
+              <div class="hs-lbl">Organizadores</div>
+            </div>
+            <div class="hs-item">
+              <div class="hs-num">4.9★</div>
+              <div class="hs-lbl">Avaliação</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="featured-card">
+            <div class="fc-img">🎵</div>
+            <div class="fc-badge">⭐ Destaque</div>
+            <div class="fc-live"><span class="fc-live-dot"></span>Quente</div>
+            <div class="fc-body">
+              <div class="fc-cat">🎵 Música</div>
+              <div class="fc-title">Festival de Música de Moçambique 2025</div>
+              <div class="fc-meta">
+                <div class="fc-meta-row">📅 12–14 Jul 2025</div>
+                <div class="fc-meta-row">📍 Praia do Tofo, Inhambane</div>
+                <div class="fc-meta-row">👥 8.000 participantes</div>
+              </div>
+              <div class="fc-footer">
+                <div class="fc-price">MT6638 <span>/ bilhete</span></div>
+                <button class="fc-btn" onclick="goEvents()">Ver Mais</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-section">
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input
+          class="search-input"
+          placeholder="Pesquisar eventos, artistas, locais..."
+          id="searchInp"
+          oninput="filterEvents(this.value)"
+        />
+        <div class="search-divider"></div>
+        <button class="search-filter">📍 Lisboa</button>
+        <div class="search-divider"></div>
+        <button class="search-filter">📅 Qualquer data</button>
+        <button class="search-go">Pesquisar</button>
+      </div>
+      <div class="cats" id="cats">
+        <button class="cat-btn active" onclick="filterCat(this, 'todos')">
+          <span class="cat-icon">✨</span>Todos
+        </button>
+        <button class="cat-btn" onclick="filterCat(this, 'musica')">
+          <span class="cat-icon">🎵</span>Música
+        </button>
+        <button class="cat-btn" onclick="filterCat(this, 'arte')">
+          <span class="cat-icon">🎨</span>Arte & Cultura
+        </button>
+        <button class="cat-btn" onclick="filterCat(this, 'desporto')">
+          <span class="cat-icon">⚽</span>Desporto
+        </button>
+        <button class="cat-btn" onclick="filterCat(this, 'gastronomia')">
+          <span class="cat-icon">🍽️</span>Gastronomia
+        </button>
+        <button class="cat-btn" onclick="filterCat(this, 'teatro')">
+          <span class="cat-icon">🎭</span>Teatro
+        </button>
+        <button class="cat-btn" onclick="filterCat(this, 'tech')">
+          <span class="cat-icon">💻</span>Tecnologia
+        </button>
+        <button class="cat-btn" onclick="filterCat(this, 'workshops')">
+          <span class="cat-icon">🛠️</span>Workshops
+        </button>
+        <button class="cat-btn" onclick="filterCat(this, 'feiras')">
+          <span class="cat-icon">🎪</span>Feiras
+        </button>
+        <button class="cat-btn" onclick="filterCat(this, 'cinema')">
+          <span class="cat-icon">🎬</span>Cinema
+        </button>
+      </div>
+    </div>
+
+    <!-- EVENTS GRID -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">EM <span>DESTAQUE</span></div>
+        <button class="section-link" onclick="window.location.href='eventflow_events.html'">Ver todos →</button>
+      </div>
+      <div class="events-grid" id="eventsGrid"></div>
+    </div>
+
+    <!-- UPCOMING -->
+    <div class="section" style="padding-bottom: 0">
+      <div class="section-header">
+        <div class="section-title">PRÓXIMOS <span>EVENTOS</span></div>
+        <button class="section-link" onclick="window.location.href='eventflow_events.html'">Ver calendário →</button>
+      </div>
+      <table class="upcoming-table">
+        <thead>
+          <tr>
+            <th>Evento</th>
+            <th>Data</th>
+            <th>Local</th>
+            <th>Preço</th>
+            <th>Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="upcomingTbody"></tbody>
+      </table>
+    </div>
+
+    <!-- NEAR YOU -->
+    <div class="section" style="padding-bottom: 0">
+      <div class="section-header">
+        <div class="section-title">PERTO <span>DE TI</span></div>
+        <button class="section-link" onclick="window.location.href='eventflow_events.html'">Ver mapa →</button>
+      </div>
+      <div class="events-scroll" id="nearScroll"></div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="page-footer">
+      <div class="footer-brand">EVENTFLOW</div>
+      <div class="footer-links">
+        <button class="footer-link" onclick="window.location.href='eventflow_about.html'">Sobre</button>
+        <button class="footer-link" onclick="window.location.href='eventflow_terms.html'">Termos</button>
+        <button class="footer-link" onclick="window.location.href='eventflow_privacy.html'">Privacidade</button>
+        <button class="footer-link" onclick="window.location.href='eventflow_about.html#contacto'">Contacto</button>
+        <button class="footer-link" onclick="alert('Documentação API disponível em breve')">API</button>
+      </div>
+      <div class="footer-copy">© 2026 EventFlow ·</div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/eventflow_homepage.js"></script>
+  </body>
+</html>

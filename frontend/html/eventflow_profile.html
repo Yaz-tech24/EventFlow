@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EventFlow — O Meu Perfil</title>
+<link rel="stylesheet" href="../css/eventflow_profile.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="eventflow_homepage.html">
+    <div class="nav-logo">🎪</div>
+    <div class="nav-name">EVENTFLOW</div>
+  </a>
+  <div class="nav-links">
+    <button class="nav-link" onclick="window.location.href='eventflow_homepage.html'">Início</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_events.html'">Eventos</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_categories.html'">Categorias</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_organizers.html'">Organizadores</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_about.html'">Sobre</button>
+  </div>
+  <div class="nav-right">
+    <button class="notif-btn" onclick="window.location.href='eventflow_notifications.html'">🔔<span class="notif-dot"></span></button>
+    <div class="nav-avatar" onclick="showSection('perfil')">CF</div>
+  </div>
+</nav>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- LAYOUT -->
+<div class="profile-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-user">
+      <div class="sb-avatar">CF</div>
+      <div class="sb-info">
+        <div class="sb-name">Carlos Fumo</div>
+        <div class="sb-role">🎟️ Utilizador</div>
+        <div class="sb-since">Membro desde Jan 2024</div>
+      </div>
+    </div>
+    <nav class="sb-nav">
+      <button class="sb-link active" data-section="dashboard" onclick="showSection('dashboard',this)">
+        <span class="sbl-icon">📊</span>Dashboard
+      </button>
+      <button class="sb-link" data-section="bilhetes" onclick="showSection('bilhetes',this)">
+        <span class="sbl-icon">🎟️</span>Meus Bilhetes
+        <span class="sbl-badge">3</span>
+      </button>
+      <button class="sb-link" data-section="favoritos" onclick="showSection('favoritos',this)">
+        <span class="sbl-icon">❤️</span>Favoritos
+        <span class="sbl-badge">5</span>
+      </button>
+      <button class="sb-link" data-section="historico" onclick="showSection('historico',this)">
+        <span class="sbl-icon">📋</span>Histórico
+      </button>
+      <button class="sb-link" data-section="perfil" onclick="showSection('perfil',this)">
+        <span class="sbl-icon">👤</span>Perfil
+      </button>
+      <button class="sb-link" data-section="config" onclick="showSection('config',this)">
+        <span class="sbl-icon">⚙️</span>Definições
+      </button>
+    </nav>
+    <button class="sb-logout" onclick="Auth.logout()">
+      <span>🚪</span>Terminar Sessão
+    </button>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- DASHBOARD -->
+    <div class="section-content" id="sec-dashboard">
+      <div class="content-header">
+        <div class="ch-title">Dashboard</div>
+        <div class="ch-sub">Bem-vindo de volta, Carlos!</div>
+      </div>
+      <div class="dash-stats">
+        <div class="ds-card"><div class="ds-icon">🎟️</div><div class="ds-num">8</div><div class="ds-lbl">Bilhetes Comprados</div></div>
+        <div class="ds-card"><div class="ds-icon">❤️</div><div class="ds-num">5</div><div class="ds-lbl">Eventos Favoritos</div></div>
+        <div class="ds-card"><div class="ds-icon">✅</div><div class="ds-num">6</div><div class="ds-lbl">Eventos Frequentados</div></div>
+        <div class="ds-card"><div class="ds-icon">⭐</div><div class="ds-num">4.8</div><div class="ds-lbl">Avaliação Média Dada</div></div>
+      </div>
+      <div class="dash-grid">
+        <div class="dash-block">
+          <div class="db-title">PRÓXIMOS EVENTOS</div>
+          <div class="upcoming-list" id="upcomingDash"></div>
+          <button class="db-link" onclick="showSection('bilhetes',null)">Ver todos os bilhetes →</button>
+        </div>
+        <div class="dash-block">
+          <div class="db-title">ACTIVIDADE RECENTE</div>
+          <div class="activity-list" id="activityDash"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BILHETES -->
+    <div class="section-content hidden" id="sec-bilhetes">
+      <div class="content-header">
+        <div class="ch-title">Meus Bilhetes</div>
+        <div class="ch-sub">Todos os teus bilhetes num só lugar</div>
+      </div>
+      <div class="tickets-filter">
+        <button class="tf-btn active" data-tf="todos">Todos (8)</button>
+        <button class="tf-btn" data-tf="proximos">Próximos (3)</button>
+        <button class="tf-btn" data-tf="passados">Passados (5)</button>
+      </div>
+      <div class="tickets-list" id="ticketsList"></div>
+    </div>
+
+    <!-- FAVORITOS -->
+    <div class="section-content hidden" id="sec-favoritos">
+      <div class="content-header">
+        <div class="ch-title">Favoritos</div>
+        <div class="ch-sub">Eventos que guardaste para ver mais tarde</div>
+      </div>
+      <div class="favs-grid" id="favsGrid"></div>
+    </div>
+
+    <!-- HISTÓRICO -->
+    <div class="section-content hidden" id="sec-historico">
+      <div class="content-header">
+        <div class="ch-title">Histórico</div>
+        <div class="ch-sub">Todas as tuas transações e atividades</div>
+      </div>
+      <div class="history-table-wrap">
+        <table class="history-table">
+          <thead>
+            <tr><th>Evento</th><th>Data</th><th>Tipo</th><th>Valor</th><th>Estado</th></tr>
+          </thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PERFIL -->
+    <div class="section-content hidden" id="sec-perfil">
+      <div class="content-header">
+        <div class="ch-title">Perfil</div>
+        <div class="ch-sub">Gere as tuas informações pessoais</div>
+      </div>
+      <div class="profile-form">
+        <div class="pf-avatar-section">
+          <div class="pf-avatar">CF</div>
+          <div>
+            <div class="pf-name-big">Carlos Fumo</div>
+            <div class="pf-role-badge">🎟️ Utilizador Verificado</div>
+            <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="uploadAvatar(this)">
+          <button class="pf-change-btn" onclick="document.getElementById('avatarInput').click()">Alterar Foto</button>
+          </div>
+        </div>
+        <div class="pf-grid">
+          <div class="pf-group">
+            <label class="pf-label">Primeiro Nome</label>
+            <input class="pf-input" id="pf-firstname" type="text" value="Carlos">
+          </div>
+          <div class="pf-group">
+            <label class="pf-label">Último Nome</label>
+            <input class="pf-input" id="pf-lastname" type="text" value="Fumo">
+          </div>
+          <div class="pf-group">
+            <label class="pf-label">Email</label>
+            <input class="pf-input" id="pf-email" type="email" value="carlos.fumo@email.com">
+          </div>
+          <div class="pf-group">
+            <label class="pf-label">Telemóvel</label>
+            <input class="pf-input" id="pf-phone" type="tel" value="+258 84 123 4567">
+          </div>
+          <div class="pf-group">
+            <label class="pf-label">Data de Nascimento</label>
+            <input class="pf-input" id="pf-birthdate" type="date" value="1995-03-15">
+          </div>
+          <div class="pf-group">
+            <label class="pf-label">Cidade</label>
+            <input class="pf-input" id="pf-city" type="text" value="Maputo">
+          </div>
+        </div>
+        <button class="pf-save" onclick="saveProfile()">GUARDAR ALTERAÇÕES →</button>
+      </div>
+    </div>
+
+    <!-- DEFINIÇÕES -->
+    <div class="section-content hidden" id="sec-config">
+      <div class="content-header">
+        <div class="ch-title">Definições</div>
+        <div class="ch-sub">Personaliza a tua experiência</div>
+      </div>
+      <div class="config-sections">
+        <div class="config-block">
+          <div class="config-title">NOTIFICAÇÕES</div>
+          <div class="config-item">
+            <div class="ci-info">
+              <div class="ci-name">Novos eventos na minha área</div>
+              <div class="ci-desc">Recebe alertas quando novos eventos são criados perto de ti</div>
+            </div>
+            <label class="toggle"><input type="checkbox" id="t-area" checked onchange="saveToggle(this)"><span class="toggle-slider"></span></label>
+          </div>
+          <div class="config-item">
+            <div class="ci-info">
+              <div class="ci-name">Confirmação de compra</div>
+              <div class="ci-desc">Email de confirmação para cada bilhete comprado</div>
+            </div>
+            <label class="toggle"><input type="checkbox" id="t-compra" checked onchange="saveToggle(this)"><span class="toggle-slider"></span></label>
+          </div>
+          <div class="config-item">
+            <div class="ci-info">
+              <div class="ci-name">Newsletters EventFlow</div>
+              <div class="ci-desc">Novidades, destaques e ofertas especiais</div>
+            </div>
+            <label class="toggle"><input type="checkbox" id="t-news" onchange="saveToggle(this)"><span class="toggle-slider"></span></label>
+          </div>
+          <div class="config-item">
+            <div class="ci-info">
+              <div class="ci-name">Lembretes de eventos</div>
+              <div class="ci-desc">Lembrete 24h e 1h antes do evento</div>
+            </div>
+            <label class="toggle"><input type="checkbox" id="t-lemb" checked onchange="saveToggle(this)"><span class="toggle-slider"></span></label>
+          </div>
+        </div>
+        <div class="config-block">
+          <div class="config-title">PRIVACIDADE</div>
+          <div class="config-item">
+            <div class="ci-info">
+              <div class="ci-name">Perfil público</div>
+              <div class="ci-desc">Outros utilizadores podem ver o teu perfil</div>
+            </div>
+            <label class="toggle"><input type="checkbox" id="t-public" onchange="saveToggle(this)"><span class="toggle-slider"></span></label>
+          </div>
+          <div class="config-item">
+            <div class="ci-info">
+              <div class="ci-name">Partilhar histórico de eventos</div>
+              <div class="ci-desc">Mostrar eventos que frequentaste no teu perfil</div>
+            </div>
+            <label class="toggle"><input type="checkbox" id="t-hist" checked onchange="saveToggle(this)"><span class="toggle-slider"></span></label>
+          </div>
+        </div>
+        <div class="config-block danger-block">
+          <div class="config-title">ZONA PERIGOSA</div>
+          <div class="config-item">
+            <div class="ci-info">
+              <div class="ci-name">Alterar Password</div>
+              <div class="ci-desc">Atualiza a tua password de acesso</div>
+            </div>
+            <button class="ci-btn" onclick="window.location.href='eventflow_forgot_password.html'">Alterar →</button>
+          </div>
+          <div class="config-item">
+            <div class="ci-info">
+              <div class="ci-name">Eliminar Conta</div>
+              <div class="ci-desc">Elimina permanentemente a tua conta e dados</div>
+            </div>
+            <button class="ci-btn danger" onclick="showToast('Contacta o suporte para eliminar a conta')">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- QR CODE MODAL -->
+<div class="modal-overlay" id="qrModal" onclick="closeModal('qrModal')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('qrModal')">✕</button>
+    <div class="modal-title">O Teu Bilhete</div>
+    <div id="qrContent" style="text-align:center;padding:8px 0"></div>
+  </div>
+</div>
+
+<!-- REVIEW MODAL -->
+<div class="modal-overlay" id="reviewModal" onclick="closeModal('reviewModal')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('reviewModal')">✕</button>
+    <div class="modal-title">Avaliar Evento</div>
+    <div id="reviewEventName" style="margin-bottom:12px;color:rgba(255,255,255,0.6);font-size:14px"></div>
+    <div class="star-row" id="starRow" data-rating="0">
+      <span onclick="setStars(1)">⭐</span>
+      <span onclick="setStars(2)">⭐</span>
+      <span onclick="setStars(3)">⭐</span>
+      <span onclick="setStars(4)">⭐</span>
+      <span onclick="setStars(5)">⭐</span>
+    </div>
+    <textarea id="reviewComment" class="pf-input" style="width:100%;margin-top:12px;min-height:80px;box-sizing:border-box" placeholder="Escreve o teu comentário..."></textarea>
+    <button class="pf-save" style="margin-top:12px" onclick="submitReview()">ENVIAR AVALIAÇÃO →</button>
+  </div>
+</div>
+
+<style>
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal-box{background:#100820;border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:24px;max-width:420px;width:90%;position:relative}
+.modal-close{position:absolute;top:12px;right:14px;background:none;border:none;color:rgba(255,255,255,0.5);font-size:20px;cursor:pointer;line-height:1}
+.modal-title{font-size:18px;font-weight:700;margin-bottom:16px}
+.star-row{display:flex;gap:6px;font-size:28px;cursor:pointer;justify-content:center}
+.star-row span{opacity:0.25;transition:opacity 0.15s}
+.star-row span.active{opacity:1}
+</style>
+
+<script src="../js/api.js"></script>
+<script src="../js/eventflow_profile.js"></script>
+</body>
+</html>

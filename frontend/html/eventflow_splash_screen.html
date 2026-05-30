@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EventFlow — Plataforma #1 de Eventos em Moçambique</title>
+<link rel="stylesheet" href="../css/eventflow_splash_screen.css" />
+</head>
+<body>
+
+<div id="splash">
+  <canvas id="bg"></canvas>
+  <div class="grid-overlay"></div>
+  <div class="vignette"></div>
+  <div class="scanline"></div>
+
+  <div class="floating-tags" id="floatingTags"></div>
+  <div class="particles" id="particles"></div>
+
+  <div class="content">
+    <div class="logo-ring">
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="40" r="36" stroke="url(#ringGrad)" stroke-width="1" stroke-dasharray="8 4"/>
+        <circle cx="40" cy="40" r="28" stroke="rgba(255,60,172,0.2)" stroke-width="0.5"/>
+        <circle cx="40" cy="4" r="3" fill="#FF3CAC" filter="url(#glow)"/>
+        <circle cx="76" cy="40" r="2" fill="#784BA0"/>
+        <circle cx="4" cy="40" r="2" fill="#2B86C5"/>
+        <defs>
+          <linearGradient id="ringGrad" x1="0" y1="0" x2="80" y2="80">
+            <stop offset="0%" stop-color="#FF3CAC"/>
+            <stop offset="50%" stop-color="#784BA0"/>
+            <stop offset="100%" stop-color="#2B86C5"/>
+          </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+      </svg>
+      <div class="logo-center">🎪</div>
+    </div>
+
+    <div class="tagline-top">Bem-vindo ao futuro dos eventos em Moçambique</div>
+
+    <div class="brand-name">EVENTFLOW</div>
+    <div class="brand-sub">GESTÃO DE EVENTOS</div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-dot"></div>
+      <div class="divider-line right"></div>
+    </div>
+
+    <div class="subtitle">Descubra · Reserve · Viva</div>
+
+    <button class="btn-enter" onclick="enterSite()">
+      <div class="corner-tl"></div>
+      <div class="corner-tr"></div>
+      <div class="corner-bl"></div>
+      <div class="corner-br"></div>
+      <div class="btn-enter-inner">
+        <span>Entrar na Plataforma</span>
+      </div>
+    </button>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num" id="s1">0</div>
+      <div class="stat-label">Eventos Ativos</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" id="s2">0</div>
+      <div class="stat-label">Bilhetes Vendidos</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" id="s3">0</div>
+      <div class="stat-label">Utilizadores</div>
+    </div>
+  </div>
+
+  <div class="loading-bar" id="loadBar"></div>
+</div>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+
+<script src="../js/api.js"></script>
+<script src="../js/eventflow_splash_screen.js"></script>
+</body>
+</html>

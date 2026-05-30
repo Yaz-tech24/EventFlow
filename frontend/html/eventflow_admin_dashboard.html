@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EventFlow — Admin Dashboard</title>
+<link rel="stylesheet" href="../css/eventflow_admin_dashboard.css">
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="eventflow_homepage.html">
+    <div class="nav-logo">🎪</div>
+    <div class="nav-name">EVENTFLOW</div>
+  </a>
+  <div class="nav-badge">ADMINISTRADOR</div>
+  <div class="nav-right">
+    <button class="notif-btn" onclick="window.location.href='eventflow_notifications.html'">🔔<span class="notif-dot"></span></button>
+    <div class="nav-avatar">AD</div>
+  </div>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-brand">
+      <div class="sb-icon">👑</div>
+      <div>
+        <div class="sb-title">Admin Panel</div>
+        <div class="sb-sub">Acesso total à plataforma</div>
+      </div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section-lbl">PRINCIPAL</div>
+      <button class="sb-link active" data-section="overview" onclick="showSection('overview',this)"><span>📊</span>Visão Geral</button>
+      <button class="sb-link" data-section="users" onclick="showSection('users',this)"><span>👥</span>Utilizadores<span class="sbl-badge">2.4K</span></button>
+      <button class="sb-link" data-section="events" onclick="showSection('events',this)"><span>🎪</span>Eventos<span class="sbl-badge">48</span></button>
+      <button class="sb-link" data-section="organizers" onclick="showSection('organizers',this)"><span>🏢</span>Organizadores</button>
+      <div class="sb-section-lbl">FINANÇAS</div>
+      <button class="sb-link" data-section="revenue" onclick="showSection('revenue',this)"><span>💰</span>Receitas</button>
+      <button class="sb-link" data-section="payouts" onclick="showSection('payouts',this)"><span>💳</span>Pagamentos</button>
+      <div class="sb-section-lbl">SISTEMA</div>
+      <button class="sb-link" data-section="reports" onclick="showSection('reports',this)"><span>📋</span>Relatórios</button>
+      <button class="sb-link" data-section="settings" onclick="showSection('settings',this)"><span>⚙️</span>Configurações</button>
+    </nav>
+    <button class="sb-logout" onclick="window.location.href='eventflow_login_register.html'"><span>🚪</span>Terminar Sessão</button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- OVERVIEW -->
+    <div class="section-content" id="sec-overview">
+      <div class="content-header">
+        <div class="ch-left">
+          <div class="ch-title">Visão Geral</div>
+          <div class="ch-sub">Estado atual da plataforma EventFlow</div>
+        </div>
+        <select class="period-sel" onchange="showToast('Período: '+this.value)">
+          <option>Últimos 30 dias</option><option>Últimos 7 dias</option>
+          <option>Este ano</option><option>Sempre</option>
+        </select>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card"><div class="kpi-ico" style="background:rgba(255,60,172,0.12);color:var(--pink)">👥</div><div class="kpi-body"><div class="kpi-num" id="kNum1">2.418</div><div class="kpi-lbl">Utilizadores Totais</div></div><div class="kpi-delta up">+127 este mês</div></div>
+        <div class="kpi-card"><div class="kpi-ico" style="background:rgba(43,134,197,0.12);color:var(--blue)">🎪</div><div class="kpi-body"><div class="kpi-num">48</div><div class="kpi-lbl">Eventos Publicados</div></div><div class="kpi-delta up">+6 este mês</div></div>
+        <div class="kpi-card"><div class="kpi-ico" style="background:rgba(0,214,143,0.12);color:#00d68f">🎟️</div><div class="kpi-body"><div class="kpi-num">14.832</div><div class="kpi-lbl">Bilhetes Vendidos</div></div><div class="kpi-delta up">+18% vs mês ant.</div></div>
+        <div class="kpi-card"><div class="kpi-ico" style="background:rgba(255,140,0,0.12);color:#ff8c00">💰</div><div class="kpi-body"><div class="kpi-num">MT 2.1M</div><div class="kpi-lbl">Receita Total</div></div><div class="kpi-delta up">+22% vs mês ant.</div></div>
+        <div class="kpi-card"><div class="kpi-ico" style="background:rgba(120,75,160,0.12);color:var(--purple)">🏢</div><div class="kpi-body"><div class="kpi-num">58</div><div class="kpi-lbl">Organizadores Ativos</div></div><div class="kpi-delta up">+4 novos</div></div>
+        <div class="kpi-card"><div class="kpi-ico" style="background:rgba(255,60,172,0.08);color:rgba(255,60,172,0.7)">⭐</div><div class="kpi-body"><div class="kpi-num">4.8</div><div class="kpi-lbl">Avaliação Média</div></div><div class="kpi-delta up">Excelente</div></div>
+      </div>
+
+      <div class="overview-grid">
+        <div class="dash-block">
+          <div class="db-hdr"><div class="db-title">EVENTOS PENDENTES DE APROVAÇÃO</div><span class="badge-count">3</span></div>
+          <div id="pendingEvents"></div>
+        </div>
+        <div class="dash-block">
+          <div class="db-hdr"><div class="db-title">ALERTAS DO SISTEMA</div></div>
+          <div id="systemAlerts"></div>
+        </div>
+        <div class="dash-block span2">
+          <div class="db-hdr"><div class="db-title">UTILIZADORES RECENTES</div><a class="db-link" onclick="showSection('users',document.querySelector('[data-section=users]'))">Ver todos →</a></div>
+          <div id="recentUsers"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- USERS -->
+    <div class="section-content hidden" id="sec-users">
+      <div class="content-header">
+        <div class="ch-left"><div class="ch-title">Utilizadores</div><div class="ch-sub">Gestão de todos os utilizadores da plataforma</div></div>
+        <button class="ch-cta" onclick="showToast('A exportar utilizadores...')">⬇ Exportar</button>
+      </div>
+      <div class="users-toolbar">
+        <input class="tb-search" type="text" placeholder="🔍  Pesquisar utilizador..." oninput="searchUsers(this.value)">
+        <select class="tb-select" onchange="filterUsersByRole(this.value)">
+          <option value="todos">Todos os papéis</option>
+          <option value="user">Utilizador</option>
+          <option value="organizer">Organizador</option>
+          <option value="admin">Admin</option>
+        </select>
+        <select class="tb-select" onchange="showToast('Filtro: '+this.value)">
+          <option>Todos os estados</option>
+          <option>Ativos</option>
+          <option>Suspensos</option>
+          <option>Banidos</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table class="admin-table">
+          <thead><tr><th>Utilizador</th><th>Email</th><th>Papel</th><th>Registado</th><th>Bilhetes</th><th>Estado</th><th>Ações</th></tr></thead>
+          <tbody id="usersTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- EVENTS -->
+    <div class="section-content hidden" id="sec-events">
+      <div class="content-header">
+        <div class="ch-left"><div class="ch-title">Eventos</div><div class="ch-sub">Todos os eventos da plataforma</div></div>
+        <button class="ch-cta" onclick="showToast('A exportar eventos...')">⬇ Exportar</button>
+      </div>
+      <div class="users-toolbar">
+        <input class="tb-search" type="text" placeholder="🔍  Pesquisar evento...">
+        <select class="tb-select" onchange="showToast('Filtro: '+this.value)">
+          <option>Todos os estados</option><option>Publicados</option>
+          <option>Pendentes</option><option>Rascunhos</option><option>Cancelados</option>
+        </select>
+        <select class="tb-select" onchange="showToast('Categoria: '+this.value)">
+          <option>Todas as categorias</option><option>🎵 Música</option>
+          <option>🎨 Arte</option><option>💡 Tecnologia</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table class="admin-table">
+          <thead><tr><th>Evento</th><th>Organizador</th><th>Data</th><th>Vendas</th><th>Receita</th><th>Estado</th><th>Ações</th></tr></thead>
+          <tbody id="eventsTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ORGANIZERS -->
+    <div class="section-content hidden" id="sec-organizers">
+      <div class="content-header">
+        <div class="ch-left"><div class="ch-title">Organizadores</div><div class="ch-sub">Gestão de organizadores e verificações</div></div>
+      </div>
+      <div class="org-admin-grid" id="orgAdminGrid"></div>
+    </div>
+
+    <!-- REVENUE -->
+    <div class="section-content hidden" id="sec-revenue">
+      <div class="content-header">
+        <div class="ch-left"><div class="ch-title">Receitas</div><div class="ch-sub">Análise financeira completa da plataforma</div></div>
+        <button class="ch-cta" onclick="showToast('A gerar relatório...')">📋 Relatório</button>
+      </div>
+      <div class="rev-stats">
+        <div class="rev-card big"><div class="rev-icon">💰</div><div class="rev-num">MT 2.143.600</div><div class="rev-lbl">Receita Total 2025</div><div class="rev-prog"><div class="rev-fill" style="width:71%"></div></div><div class="rev-sub">71% da meta · MT 3M</div></div>
+        <div class="rev-card"><div class="rev-icon">📅</div><div class="rev-num">MT 284.600</div><div class="rev-lbl">Este Mês</div></div>
+        <div class="rev-card"><div class="rev-icon">💼</div><div class="rev-num">MT 64.308</div><div class="rev-lbl">Comissão EventFlow (3%)</div></div>
+        <div class="rev-card"><div class="rev-icon">📤</div><div class="rev-num">MT 2.079.292</div><div class="rev-lbl">Pago a Organizadores</div></div>
+      </div>
+      <div class="rev-chart-wrap dash-block">
+        <div class="db-hdr"><div class="db-title">EVOLUÇÃO DE RECEITA MENSAL</div></div>
+        <div class="rev-chart" id="revChart"></div>
+      </div>
+    </div>
+
+    <!-- PAYOUTS -->
+    <div class="section-content hidden" id="sec-payouts">
+      <div class="content-header">
+        <div class="ch-left"><div class="ch-title">Pagamentos</div><div class="ch-sub">Gerir pagamentos pendentes aos organizadores</div></div>
+      </div>
+      <div class="table-wrap">
+        <table class="admin-table">
+          <thead><tr><th>Organizador</th><th>Evento</th><th>Valor</th><th>Método</th><th>Data Solicitada</th><th>Estado</th><th>Ações</th></tr></thead>
+          <tbody id="payoutsBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- REPORTS -->
+    <div class="section-content hidden" id="sec-reports">
+      <div class="content-header">
+        <div class="ch-left"><div class="ch-title">Relatórios</div><div class="ch-sub">Exporta e analisa dados da plataforma</div></div>
+      </div>
+      <div class="reports-grid" id="reportsGrid"></div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="section-content hidden" id="sec-settings">
+      <div class="content-header">
+        <div class="ch-left"><div class="ch-title">Configurações</div><div class="ch-sub">Definições globais da plataforma</div></div>
+      </div>
+      <div class="settings-wrap">
+        <div class="sett-block">
+          <div class="sett-title">PLATAFORMA</div>
+          <div class="sett-row"><div class="sr-info"><div class="sr-name">Manutenção programada</div><div class="sr-desc">Ativar modo de manutenção — bloqueia acesso público</div></div><label class="toggle"><input type="checkbox" onchange="showToast('Modo manutenção: '+(this.checked?'ativo':'inativo'))"><span class="ts"></span></label></div>
+          <div class="sett-row"><div class="sr-info"><div class="sr-name">Registos públicos</div><div class="sr-desc">Permitir que novos utilizadores se registem</div></div><label class="toggle"><input type="checkbox" checked onchange="showToast('Registos: '+(this.checked?'ativos':'bloqueados'))"><span class="ts"></span></label></div>
+          <div class="sett-row"><div class="sr-info"><div class="sr-name">Aprovação manual de eventos</div><div class="sr-desc">Novos eventos necessitam aprovação antes de publicar</div></div><label class="toggle"><input type="checkbox" checked onchange="showToast('Aprovação manual: '+(this.checked?'ativa':'inativa'))"><span class="ts"></span></label></div>
+        </div>
+        <div class="sett-block">
+          <div class="sett-title">COMISSÕES</div>
+          <div class="sett-row">
+            <div class="sr-info"><div class="sr-name">Taxa de comissão EventFlow</div><div class="sr-desc">Percentagem cobrada em cada bilhete vendido</div></div>
+            <div style="display:flex;align-items:center;gap:6px"><input class="sett-input" type="number" value="3" min="0" max="30" style="width:60px;text-align:center"><span style="color:rgba(255,255,255,0.4);font-size:12px">%</span></div>
+          </div>
+          <div class="sett-row">
+            <div class="sr-info"><div class="sr-name">Taxa de serviço por bilhete</div><div class="sr-desc">Valor fixo adicionado a cada compra</div></div>
+            <div style="display:flex;align-items:center;gap:6px"><span style="color:rgba(255,255,255,0.4);font-size:12px">MT</span><input class="sett-input" type="number" value="25" min="0" style="width:70px;text-align:center"></div>
+          </div>
+          <button class="sett-save" onclick="showToast('Comissões atualizadas!')">GUARDAR COMISSÕES →</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/eventflow_admin_dashboard.js"></script>
+</body>
+</html>

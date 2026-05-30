@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;900&display=swap");
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--pink:#ff3cac;--purple:#784ba0;--blue:#2b86c5;--bg:#06060f;--card:#0d0d1a;--border:rgba(255,255,255,0.07)}
+body{background:var(--bg);font-family:"Outfit",sans-serif;color:#fff;min-height:100vh}
+
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:16px;padding:0 28px;height:58px;background:rgba(6,6,15,0.92);border-bottom:1px solid var(--border);backdrop-filter:blur(16px)}
+.nav-brand{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0}
+.nav-logo{width:28px;height:28px;background:rgba(255,60,172,0.15);border:1px solid rgba(255,60,172,0.4);display:flex;align-items:center;justify-content:center;font-size:14px;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.nav-name{font-family:"Bebas Neue",sans-serif;font-size:20px;letter-spacing:3px;background:linear-gradient(90deg,#ff3cac,#784ba0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:2px;flex:1;justify-content:center}
+.nav-link{padding:6px 14px;font-size:12px;letter-spacing:1px;color:rgba(255,255,255,0.45);background:none;border:none;cursor:pointer;font-family:"Outfit",sans-serif;transition:color 0.2s;border-radius:4px}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,0.05)}
+.nav-right{display:flex;align-items:center;gap:12px;margin-left:auto}
+.notif-btn{background:rgba(255,60,172,0.12);border:1px solid rgba(255,60,172,0.3);border-radius:8px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;color:#fff}
+.notif-btn.active-page{background:rgba(255,60,172,0.15);border-color:rgba(255,60,172,0.5)}
+.nav-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--purple));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;letter-spacing:1px;cursor:pointer;flex-shrink:0}
+
+.toast{position:fixed;bottom:28px;right:28px;z-index:9999;background:#13132a;border:1px solid rgba(255,60,172,0.3);padding:12px 20px;border-radius:10px;font-size:13px;color:#fff;opacity:0;transform:translateY(8px);transition:all 0.3s;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+
+.page-wrap{max-width:760px;margin:0 auto;padding:36px 24px}
+.page-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px;gap:12px;flex-wrap:wrap}
+.ph-title{font-family:"Bebas Neue",sans-serif;font-size:36px;letter-spacing:3px}
+.ph-sub{font-size:13px;color:rgba(255,255,255,0.4);margin-top:4px}
+.ph-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start}
+.ph-btn{padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.5);font-family:"Outfit",sans-serif;font-size:12px;cursor:pointer;transition:all 0.2s;white-space:nowrap}
+.ph-btn:hover{background:rgba(255,255,255,0.07);color:#fff}
+.ph-btn.danger{border-color:rgba(255,60,172,0.2);color:rgba(255,80,80,0.6)}
+.ph-btn.danger:hover{background:rgba(255,60,172,0.07);color:#ff6666}
+
+.notif-layout{display:flex;flex-direction:column;gap:16px}
+.filter-tabs{display:flex;gap:8px}
+.ft-btn{padding:7px 16px;border-radius:8px;border:1px solid var(--border);background:none;color:rgba(255,255,255,0.4);font-family:"Outfit",sans-serif;font-size:12px;cursor:pointer;transition:all 0.2s}
+.ft-btn:hover{background:rgba(255,255,255,0.05);color:#fff}
+.ft-btn.active{background:rgba(255,60,172,0.1);border-color:rgba(255,60,172,0.3);color:#fff}
+
+.notif-list{display:flex;flex-direction:column;gap:2px}
+
+.notif-item{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border-radius:12px;background:var(--card);border:1px solid var(--border);transition:all 0.2s;cursor:pointer;position:relative}
+.notif-item:hover{border-color:rgba(255,60,172,0.2);background:rgba(13,13,26,0.9)}
+.notif-item.unread{border-left:3px solid var(--pink)}
+.notif-item.unread::before{content:"";position:absolute;top:14px;right:16px;width:7px;height:7px;border-radius:50%;background:var(--pink)}
+.notif-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.notif-body{flex:1;min-width:0}
+.notif-title{font-size:13px;font-weight:600;margin-bottom:3px}
+.notif-text{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.5}
+.notif-time{font-size:10px;color:rgba(255,255,255,0.25);margin-top:5px}
+.notif-actions{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.na-btn{padding:5px 12px;border-radius:6px;font-family:"Outfit",sans-serif;font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s;border:none;letter-spacing:0.3px}
+.na-btn.primary{background:rgba(255,60,172,0.15);border:1px solid rgba(255,60,172,0.3);color:var(--pink)}
+.na-btn.primary:hover{background:rgba(255,60,172,0.22)}
+.na-btn.ghost{background:rgba(255,255,255,0.05);border:1px solid var(--border);color:rgba(255,255,255,0.5)}
+.na-btn.ghost:hover{background:rgba(255,255,255,0.08);color:#fff}
+
+.notif-dismiss{position:absolute;top:10px;right:10px;background:none;border:none;color:rgba(255,255,255,0.2);font-size:14px;cursor:pointer;padding:4px 6px;border-radius:4px;transition:all 0.15s;opacity:0}
+.notif-item:hover .notif-dismiss{opacity:1}
+.notif-dismiss:hover{color:var(--pink);background:rgba(255,60,172,0.1)}
+
+.date-divider{font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.25);font-weight:700;padding:12px 4px 4px;text-transform:uppercase}
+
+.empty-notifs{text-align:center;padding:64px 20px;color:rgba(255,255,255,0.2);display:flex;flex-direction:column;align-items:center;gap:12px}
+.en-icon{font-size:48px}
+.en-msg{font-size:14px}
+.en-sub{font-size:12px;color:rgba(255,255,255,0.15)}
+
+@media(max-width:600px){.nav-links{display:none}.page-wrap{padding:20px 12px}.ph-title{font-size:28px}.filter-tabs{flex-wrap:wrap}}

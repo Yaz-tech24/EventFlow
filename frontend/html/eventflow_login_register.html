@@ -1,0 +1,325 @@
+﻿<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+<link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventFlow — Entrar ou Registar</title>
+    <link rel="stylesheet" href="../css/eventflow_login_register.css" />
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="bg"></canvas>
+      <div class="grid"></div>
+      <div class="vignette"></div>
+
+      <!-- LEFT -->
+      <div class="left-panel">
+        <div class="brand">
+          <div class="brand-icon">🎪</div>
+          <div class="brand-text">EVENTFLOW</div>
+        </div>
+
+        <div class="left-hero">
+          <div class="left-eyebrow">Plataforma de Eventos</div>
+          <div class="left-title">
+            ACESSO<br /><span>SEGURO</span><br />& RÁPIDO
+          </div>
+          <div class="left-desc">
+            Entre na sua conta ou registe-se para descobrir eventos, comprar
+            bilhetes e gerir a sua experiência.
+          </div>
+
+          <div class="roles-label">Tipos de Acesso</div>
+          <div class="roles-grid">
+            <div
+              class="role-card"
+              style="--rc: #ff3cac"
+              onclick="previewRole('admin')"
+            >
+              <div class="role-icon">👑</div>
+              <div class="role-info">
+                <div class="role-name">Administrador</div>
+                <div class="role-desc">
+                  Gestão total da plataforma, utilizadores e relatórios
+                </div>
+              </div>
+              <div
+                class="role-badge"
+                style="background: rgba(255, 60, 172, 0.15); color: #ff3cac"
+              >
+                ADMIN
+              </div>
+            </div>
+            <div
+              class="role-card"
+              style="--rc: #784ba0"
+              onclick="previewRole('organizer')"
+            >
+              <div class="role-icon">🎭</div>
+              <div class="role-info">
+                <div class="role-name">Organizador</div>
+                <div class="role-desc">
+                  Criar e gerir eventos, bilhetes e relatórios de vendas
+                </div>
+              </div>
+              <div
+                class="role-badge"
+                style="background: rgba(120, 75, 160, 0.15); color: #a06edd"
+              >
+                ORG
+              </div>
+            </div>
+            <div
+              class="role-card"
+              style="--rc: #2b86c5"
+              onclick="previewRole('user')"
+            >
+              <div class="role-icon">🎟️</div>
+              <div class="role-info">
+                <div class="role-name">Utilizador</div>
+                <div class="role-desc">
+                  Descobrir eventos, comprar bilhetes e gerir perfil
+                </div>
+              </div>
+              <div
+                class="role-badge"
+                style="background: rgba(43, 134, 197, 0.15); color: #5aabf0"
+              >
+                USER
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="right-panel">
+        <div class="auth-card">
+          <div class="card-corner tl"></div>
+          <div class="card-corner tr"></div>
+          <div class="card-corner bl"></div>
+          <div class="card-corner br"></div>
+
+          <div class="tabs">
+            <button class="tab active" onclick="switchTab('login')">
+              Entrar
+            </button>
+            <button class="tab" onclick="switchTab('register')">
+              Registar
+            </button>
+          </div>
+
+          <!-- LOGIN -->
+          <div class="form-panel active" id="panel-login">
+            <div class="form-title">
+              Bem-vindo de volta. Insira os seus dados para aceder.
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input
+                class="form-input"
+                type="email"
+                id="l-email"
+                placeholder="o.seu@email.com"
+                oninput="validateLogin()"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Palavra-passe</label>
+              <div class="pass-row">
+                <input
+                  class="form-input"
+                  type="password"
+                  id="l-pass"
+                  placeholder="••••••••"
+                  style="padding-right: 40px"
+                  oninput="validateLogin()"
+                />
+                <button
+                  class="pass-toggle"
+                  onclick="togglePass('l-pass', this)"
+                >
+                  👁
+                </button>
+              </div>
+            </div>
+
+            <div class="forgot-link">
+              <a href="eventflow_forgot_password.html">Esqueceu a palavra-passe?</a>
+            </div>
+
+            <button class="btn-submit" onclick="doLogin()">
+              <span>Entrar na Plataforma</span>
+            </button>
+
+            <div class="divider-or"><span>OU</span></div>
+
+            <div class="social-row">
+              <button class="btn-social" onclick="showToast('Login social disponível em breve!','success')">🌐 Google</button>
+              <button class="btn-social" onclick="showToast('Login social disponível em breve!','success')">📘 Facebook</button>
+            </div>
+
+            <div
+              style="
+                text-align: center;
+                font-size: 11px;
+                color: rgba(255, 255, 255, 0.25);
+              "
+            >
+              Não tem conta?
+              <a
+                href="#"
+                style="color: #ff3cac; text-decoration: none"
+                onclick="switchTab('register')"
+                >Registe-se</a
+              >
+            </div>
+          </div>
+
+          <!-- REGISTER -->
+          <div class="form-panel" id="panel-register">
+            <div class="form-title">
+              Crie a sua conta e comece a explorar eventos incríveis.
+            </div>
+
+            <div class="form-group">
+              <div
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px"
+              >
+                <div>
+                  <label class="form-label">Nome</label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="r-fname"
+                    placeholder="João"
+                  />
+                </div>
+                <div>
+                  <label class="form-label">Apelido</label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="r-lname"
+                    placeholder="Silva"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input
+                class="form-input"
+                type="email"
+                id="r-email"
+                placeholder="o.seu@email.com"
+                oninput="checkEmail(this)"
+              />
+              <div class="form-hint" id="email-hint"></div>
+            </div>
+
+            <div class="form-group">
+              <label class="role-select-label">Tipo de Conta</label>
+              <div class="role-select-grid">
+                <button
+                  class="rs-btn sel-user"
+                  id="rb-user"
+                  onclick="selectRole('user')"
+                >
+                  <span class="icon">🎟️</span>
+                  <span>Utilizador</span>
+                </button>
+                <button
+                  class="rs-btn"
+                  id="rb-organizer"
+                  onclick="selectRole('organizer')"
+                >
+                  <span class="icon">🎭</span>
+                  <span>Organizador</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Palavra-passe</label>
+              <div class="pass-row">
+                <input
+                  class="form-input"
+                  type="password"
+                  id="r-pass"
+                  placeholder="Mínimo 8 caracteres"
+                  style="padding-right: 40px"
+                  oninput="checkStrength(this.value)"
+                />
+                <button
+                  class="pass-toggle"
+                  onclick="togglePass('r-pass', this)"
+                >
+                  👁
+                </button>
+              </div>
+              <div class="strength-bar">
+                <div class="strength-fill" id="strength-fill"></div>
+              </div>
+              <div class="form-hint" id="strength-hint"></div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Confirmar Palavra-passe</label>
+              <input
+                class="form-input"
+                type="password"
+                id="r-pass2"
+                placeholder="Repetir palavra-passe"
+                oninput="checkMatch()"
+              />
+              <div class="form-hint" id="match-hint"></div>
+            </div>
+
+            <div class="check-row">
+              <input type="checkbox" id="r-terms" />
+              <label for="r-terms"
+                >Aceito os <a href="eventflow_terms.html" target="_blank">Termos de Serviço</a> e a
+                <a href="eventflow_privacy.html" target="_blank">Política de Privacidade</a></label
+              >
+            </div>
+
+            <button class="btn-submit" onclick="doRegister()">
+              <span>Criar Conta Gratuita</span>
+            </button>
+
+            <div
+              style="
+                text-align: center;
+                font-size: 11px;
+                color: rgba(255, 255, 255, 0.25);
+              "
+            >
+              Já tem conta?
+              <a
+                href="#"
+                style="color: #ff3cac; text-decoration: none"
+                onclick="switchTab('login')"
+                >Entrar</a
+              >
+            </div>
+
+            <div class="access-indicator" id="access-indicator">
+              <div class="ai-label">Permissões desta conta</div>
+              <div class="ai-perms" id="ai-perms"></div>
+            </div>
+          </div>
+
+          <div class="toast" id="toast"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/eventflow_login_register.js"></script>
+  </body>
+</html>

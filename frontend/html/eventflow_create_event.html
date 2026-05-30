@@ -1,0 +1,414 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EventFlow — Criar Evento</title>
+<link rel="stylesheet" href="../css/eventflow_create_event.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="eventflow_homepage.html">
+    <div class="nav-logo">🎪</div>
+    <div class="nav-name">EVENTFLOW</div>
+  </a>
+  <div class="nav-badge">CRIAR EVENTO</div>
+  <div class="nav-right">
+    <button class="nav-back" onclick="history.back()">← Voltar</button>
+    <div class="nav-avatar">ML</div>
+  </div>
+</nav>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- MAIN LAYOUT -->
+<div class="create-layout">
+
+  <!-- STEPS SIDEBAR -->
+  <aside class="steps-sidebar">
+    <div class="steps-title">PASSOS</div>
+    <div class="steps-list">
+      <div class="step-item active" id="step-nav-1">
+        <div class="step-dot">1</div>
+        <div class="step-info">
+          <div class="step-name">Informação Básica</div>
+          <div class="step-desc">Título, categoria e descrição</div>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item" id="step-nav-2">
+        <div class="step-dot">2</div>
+        <div class="step-info">
+          <div class="step-name">Data & Local</div>
+          <div class="step-desc">Quando e onde é o evento</div>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item" id="step-nav-3">
+        <div class="step-dot">3</div>
+        <div class="step-info">
+          <div class="step-name">Bilhetes</div>
+          <div class="step-desc">Tipos, preços e quantidades</div>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item" id="step-nav-4">
+        <div class="step-dot">4</div>
+        <div class="step-info">
+          <div class="step-name">Publicar</div>
+          <div class="step-desc">Revisão e publicação</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE PREVIEW -->
+    <div class="preview-card" id="previewCard">
+      <div class="preview-title">PRÉ-VISUALIZAÇÃO</div>
+      <div class="preview-banner" id="previewBanner">
+        <div class="preview-emoji" id="previewEmoji">🎪</div>
+      </div>
+      <div class="preview-body">
+        <div class="preview-name" id="previewName">Nome do Evento</div>
+        <div class="preview-meta" id="previewMeta">📅 Data  ·  📍 Local</div>
+        <div class="preview-price" id="previewPrice">A partir de MT —</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- FORM AREA -->
+  <main class="form-area">
+
+    <!-- STEP 1 -->
+    <div class="step-content" id="sc-1">
+      <div class="sc-header">
+        <div class="sc-step-num">01</div>
+        <div class="sc-title">Informação Básica</div>
+      </div>
+
+      <div class="form-grid">
+        <!-- Emoji picker -->
+        <div class="fg-full">
+          <label class="fg-lbl">Emoji do Evento</label>
+          <div class="emoji-picker">
+            <div class="ep-selected" id="epSelected">🎪</div>
+            <div class="ep-options">
+              <span class="ep-opt active" onclick="pickEmoji('🎪',this)">🎪</span>
+              <span class="ep-opt" onclick="pickEmoji('🎵',this)">🎵</span>
+              <span class="ep-opt" onclick="pickEmoji('🎨',this)">🎨</span>
+              <span class="ep-opt" onclick="pickEmoji('💡',this)">💡</span>
+              <span class="ep-opt" onclick="pickEmoji('🏃',this)">🏃</span>
+              <span class="ep-opt" onclick="pickEmoji('🎭',this)">🎭</span>
+              <span class="ep-opt" onclick="pickEmoji('🎤',this)">🎤</span>
+              <span class="ep-opt" onclick="pickEmoji('🌍',this)">🌍</span>
+              <span class="ep-opt" onclick="pickEmoji('🍽️',this)">🍽️</span>
+              <span class="ep-opt" onclick="pickEmoji('📸',this)">📸</span>
+              <span class="ep-opt" onclick="pickEmoji('🎮',this)">🎮</span>
+              <span class="ep-opt" onclick="pickEmoji('🎓',this)">🎓</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Title -->
+        <div class="fg-full">
+          <label class="fg-lbl">Título do Evento <span class="req">*</span></label>
+          <input class="fg-input" id="evTitle" type="text" placeholder="Ex: Festival de Música de Moçambique 2025" oninput="updatePreview()">
+          <div class="fg-hint">Seja claro e descritivo — é o primeiro que os utilizadores veem</div>
+        </div>
+
+        <!-- Category -->
+        <div class="fg-half">
+          <label class="fg-lbl">Categoria <span class="req">*</span></label>
+          <select class="fg-input" id="evCat" onchange="updatePreview()">
+            <option value="">Seleciona uma categoria...</option>
+            <option value="musica">🎵 Música</option>
+            <option value="arte">🎨 Arte & Cultura</option>
+            <option value="tech">💡 Tecnologia</option>
+            <option value="desporto">🏃 Desporto</option>
+            <option value="teatro">🎭 Teatro & Dança</option>
+            <option value="comida">🍽️ Gastronomia</option>
+            <option value="negocios">💼 Negócios</option>
+            <option value="educacao">🎓 Educação</option>
+            <option value="lazer">🎮 Lazer</option>
+            <option value="fotografia">📸 Fotografia</option>
+          </select>
+        </div>
+
+        <!-- Language -->
+        <div class="fg-half">
+          <label class="fg-lbl">Idioma do Evento</label>
+          <select class="fg-input">
+            <option>Português</option>
+            <option>Inglês</option>
+            <option>Bilingue (PT + EN)</option>
+          </select>
+        </div>
+
+        <!-- Description -->
+        <div class="fg-full">
+          <label class="fg-lbl">Descrição <span class="req">*</span></label>
+          <textarea class="fg-input fg-textarea" id="evDesc" rows="5" placeholder="Descreve o teu evento em detalhe — o que esperar, quem é para quem, o que está incluído..." oninput="updateCharCount()"></textarea>
+          <div class="fg-footer">
+            <div class="fg-hint">Mínimo 100 caracteres</div>
+            <div class="char-count" id="charCount">0 / 1000</div>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        <div class="fg-full">
+          <label class="fg-lbl">Tags</label>
+          <div class="tags-input-wrap" id="tagsWrap" onclick="document.getElementById('tagInput').focus()">
+            <div class="tags-list" id="tagsList"></div>
+            <input class="tags-input" id="tagInput" type="text" placeholder="Adicionar tag e pressionar Enter..." onkeydown="handleTagInput(event)">
+          </div>
+          <div class="fg-hint">Ex: festival, música, ao ar livre, família</div>
+        </div>
+
+        <!-- Image upload -->
+        <div class="fg-full">
+          <label class="fg-lbl">Imagem de Capa</label>
+          <div class="upload-area" id="uploadArea" onclick="showToast('Upload de imagens em breve!')">
+            <div class="upload-icon">📷</div>
+            <div class="upload-text">Clica para fazer upload ou arrasta uma imagem</div>
+            <div class="upload-hint">PNG, JPG · Máximo 5MB · Recomendado: 1200×630px</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <div></div>
+        <button class="btn-next" onclick="nextStep(1)">Próximo: Data & Local →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step-content hidden" id="sc-2">
+      <div class="sc-header">
+        <div class="sc-step-num">02</div>
+        <div class="sc-title">Data & Local</div>
+      </div>
+
+      <div class="form-grid">
+        <!-- Dates -->
+        <div class="fg-half">
+          <label class="fg-lbl">Data de Início <span class="req">*</span></label>
+          <input class="fg-input" id="evDateStart" type="date" oninput="updatePreview()">
+        </div>
+        <div class="fg-half">
+          <label class="fg-lbl">Hora de Início <span class="req">*</span></label>
+          <input class="fg-input" id="evTimeStart" type="time" value="20:00">
+        </div>
+        <div class="fg-half">
+          <label class="fg-lbl">Data de Fim</label>
+          <input class="fg-input" id="evDateEnd" type="date">
+        </div>
+        <div class="fg-half">
+          <label class="fg-lbl">Hora de Fim</label>
+          <input class="fg-input" id="evTimeEnd" type="time" value="23:59">
+        </div>
+
+        <!-- Recurrence -->
+        <div class="fg-full">
+          <label class="fg-lbl">Recorrência</label>
+          <div class="recurrence-btns">
+            <button class="rec-btn active" onclick="selectRecurrence(this)">Único</button>
+            <button class="rec-btn" onclick="selectRecurrence(this)">Diário</button>
+            <button class="rec-btn" onclick="selectRecurrence(this)">Semanal</button>
+            <button class="rec-btn" onclick="selectRecurrence(this)">Mensal</button>
+          </div>
+        </div>
+
+        <!-- Venue name -->
+        <div class="fg-full">
+          <label class="fg-lbl">Nome do Local <span class="req">*</span></label>
+          <input class="fg-input" id="evVenue" type="text" placeholder="Ex: Praça da Independência, Hotel Polana..." oninput="updatePreview()">
+        </div>
+
+        <!-- Address -->
+        <div class="fg-full">
+          <label class="fg-lbl">Morada Completa <span class="req">*</span></label>
+          <input class="fg-input" id="evAddress" type="text" placeholder="Rua, bairro, cidade...">
+        </div>
+
+        <!-- City + Province -->
+        <div class="fg-half">
+          <label class="fg-lbl">Cidade</label>
+          <select class="fg-input" id="evCity" onchange="updatePreview()">
+            <option>Maputo</option>
+            <option>Matola</option>
+            <option>Beira</option>
+            <option>Nampula</option>
+            <option>Tete</option>
+            <option>Quelimane</option>
+            <option>Inhambane</option>
+            <option>Pemba</option>
+          </select>
+        </div>
+        <div class="fg-half">
+          <label class="fg-lbl">Capacidade Máxima</label>
+          <input class="fg-input" id="evCapacity" type="number" placeholder="Ex: 500" min="1">
+        </div>
+
+        <!-- Map placeholder -->
+        <div class="fg-full">
+          <label class="fg-lbl">Localização no Mapa</label>
+          <div class="map-placeholder">
+            <div class="map-pin">📍</div>
+            <div class="map-text">Mapa interativo — disponível em versão completa</div>
+            <button class="map-btn" onclick="showToast('A abrir mapa...')">Marcar no Mapa</button>
+          </div>
+        </div>
+
+        <!-- Online toggle -->
+        <div class="fg-full">
+          <div class="toggle-row">
+            <div>
+              <div class="tr-name">Evento Online / Híbrido</div>
+              <div class="tr-desc">O evento terá transmissão em direto ou link de acesso virtual</div>
+            </div>
+            <label class="toggle"><input type="checkbox" id="evOnline" onchange="toggleOnlineLink()"><span class="toggle-slider"></span></label>
+          </div>
+          <input class="fg-input" id="onlineLink" type="url" placeholder="https://meet.google.com/..." style="margin-top:8px;display:none">
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <button class="btn-back" onclick="prevStep(2)">← Voltar</button>
+        <button class="btn-next" onclick="nextStep(2)">Próximo: Bilhetes →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step-content hidden" id="sc-3">
+      <div class="sc-header">
+        <div class="sc-step-num">03</div>
+        <div class="sc-title">Bilhetes</div>
+      </div>
+
+      <div class="ticket-types-wrap">
+        <div class="tt-list" id="ticketTypesList"></div>
+        <button class="add-ticket-btn" onclick="addTicketType()">+ Adicionar Tipo de Bilhete</button>
+      </div>
+
+      <div class="fg-full" style="margin-top:24px">
+        <label class="fg-lbl">Política de Cancelamento</label>
+        <select class="fg-input">
+          <option>Sem reembolso</option>
+          <option>Reembolso total até 48h antes</option>
+          <option>Reembolso total até 7 dias antes</option>
+          <option>Reembolso parcial (50%) a qualquer momento</option>
+        </select>
+      </div>
+
+      <div class="toggle-row" style="margin-top:16px">
+        <div>
+          <div class="tr-name">Ativar Código Promocional</div>
+          <div class="tr-desc">Permite que compradores usem códigos de desconto</div>
+        </div>
+        <label class="toggle"><input type="checkbox" onchange="showToast('Funcionalidade de cupões ativada!')"><span class="toggle-slider"></span></label>
+      </div>
+
+      <div class="toggle-row" style="margin-top:12px">
+        <div>
+          <div class="tr-name">Limite de Bilhetes por Compra</div>
+          <div class="tr-desc">Máximo de bilhetes que um utilizador pode comprar de uma vez</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <input class="fg-input" type="number" value="4" min="1" max="20" style="width:70px;text-align:center;padding:6px 8px">
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <button class="btn-back" onclick="prevStep(3)">← Voltar</button>
+        <button class="btn-next" onclick="nextStep(3)">Próximo: Publicar →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step-content hidden" id="sc-4">
+      <div class="sc-header">
+        <div class="sc-step-num">04</div>
+        <div class="sc-title">Revisão & Publicação</div>
+      </div>
+
+      <div class="review-layout">
+        <!-- Summary -->
+        <div class="review-card" id="reviewSummary">
+          <div class="review-section-title">RESUMO DO EVENTO</div>
+          <div id="reviewContent"></div>
+        </div>
+
+        <!-- Publish options -->
+        <div class="publish-panel">
+          <div class="pp-title">OPÇÕES DE PUBLICAÇÃO</div>
+          <div class="pub-options">
+            <label class="pub-opt active" id="pubOpt1">
+              <input type="radio" name="pubType" value="agora" checked onchange="selectPubOpt(this.parentElement)">
+              <div class="pub-opt-icon">🚀</div>
+              <div class="pub-opt-body">
+                <div class="pub-opt-name">Publicar Agora</div>
+                <div class="pub-opt-desc">O evento fica visível imediatamente</div>
+              </div>
+            </label>
+            <label class="pub-opt" id="pubOpt2">
+              <input type="radio" name="pubType" value="agendado" onchange="selectPubOpt(this.parentElement)">
+              <div class="pub-opt-icon">📅</div>
+              <div class="pub-opt-body">
+                <div class="pub-opt-name">Agendar Publicação</div>
+                <div class="pub-opt-desc">Define uma data para publicar automaticamente</div>
+              </div>
+            </label>
+            <label class="pub-opt" id="pubOpt3">
+              <input type="radio" name="pubType" value="rascunho" onchange="selectPubOpt(this.parentElement)">
+              <div class="pub-opt-icon">📝</div>
+              <div class="pub-opt-body">
+                <div class="pub-opt-name">Guardar como Rascunho</div>
+                <div class="pub-opt-desc">Grava sem publicar para rever mais tarde</div>
+              </div>
+            </label>
+          </div>
+
+          <div class="pp-checklist">
+            <div class="pp-check-title">CHECKLIST</div>
+            <div class="pp-check-item" id="chk1"><span class="chk-icon">⏳</span><span>Informação básica</span></div>
+            <div class="pp-check-item" id="chk2"><span class="chk-icon">⏳</span><span>Data & local</span></div>
+            <div class="pp-check-item" id="chk3"><span class="chk-icon">⏳</span><span>Pelo menos 1 bilhete</span></div>
+          </div>
+
+          <button class="publish-btn" id="publishBtn" onclick="publishEvent()">
+            🚀 PUBLICAR EVENTO
+          </button>
+          <button class="draft-btn" onclick="saveDraft()">Guardar Rascunho</button>
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <button class="btn-back" onclick="prevStep(4)">← Voltar</button>
+        <div></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay hidden" id="successModal">
+  <div class="success-modal">
+    <div class="sm-aura"></div>
+    <div class="sm-emoji">🎉</div>
+    <div class="sm-title">EVENTO PUBLICADO!</div>
+    <div class="sm-sub">O teu evento está agora visível na plataforma</div>
+    <div class="sm-actions">
+      <button class="sm-btn primary" onclick="window.location.href='eventflow_organizer_dashboard.html'">Ver no Dashboard</button>
+      <button class="sm-btn secondary" onclick="window.location.href='eventflow_event_detail_checkout.html'">Ver Página do Evento</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/eventflow_create_event.js"></script>
+</body>
+</html>

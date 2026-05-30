@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EventFlow — Categorias de Eventos</title>
+<link rel="stylesheet" href="../css/eventflow_categories.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="eventflow_homepage.html">
+    <div class="nav-logo">🎪</div>
+    <div class="nav-name">EVENTFLOW</div>
+  </a>
+  <div class="nav-links">
+    <button class="nav-link" onclick="window.location.href='eventflow_homepage.html'">Início</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_events.html'">Eventos</button>
+    <button class="nav-link active">Categorias</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_organizers.html'">Organizadores</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_about.html'">Sobre</button>
+  </div>
+  <div class="nav-right">
+    <button class="notif-btn" onclick="window.location.href='eventflow_notifications.html'">🔔<span class="notif-dot"></span></button>
+    <button class="nav-btn btn-ghost" onclick="window.location.href='eventflow_login_register.html'">Entrar</button>
+    <button class="nav-btn btn-primary" onclick="window.location.href='eventflow_events.html'">Explorar</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <canvas id="bg" class="hero-canvas"></canvas>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="hero-badge-dot"></span>10 Categorias Disponíveis</div>
+    <div class="hero-title">EXPLORAR POR<br><span class="grad">CATEGORIAS</span></div>
+    <div class="hero-sub">Encontra os eventos perfeitos para os teus interesses. De música a tecnologia, temos tudo o que procuras.</div>
+    <div class="hero-search">
+      <span class="hs-icon">🔍</span>
+      <input class="hs-input" id="catSearch" type="text" placeholder="Pesquisar categoria...">
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="sb-item"><div class="sb-num">247</div><div class="sb-lbl">Eventos Ativos</div></div>
+  <div class="sb-sep"></div>
+  <div class="sb-item"><div class="sb-num">10</div><div class="sb-lbl">Categorias</div></div>
+  <div class="sb-sep"></div>
+  <div class="sb-item"><div class="sb-num">58</div><div class="sb-lbl">Organizadores</div></div>
+  <div class="sb-sep"></div>
+  <div class="sb-item"><div class="sb-num">12K+</div><div class="sb-lbl">Bilhetes Vendidos</div></div>
+</div>
+
+<!-- CATEGORIES GRID -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">TODAS AS <span>CATEGORIAS</span></div>
+    <div class="section-count" id="catCount">10 categorias</div>
+  </div>
+  <div class="categories-grid" id="categoriesGrid"></div>
+</div>
+
+<!-- FEATURED SECTION -->
+<div class="section featured-section">
+  <div class="section-header">
+    <div class="section-title">EM <span>DESTAQUE</span></div>
+    <button class="section-link" onclick="window.location.href='eventflow_homepage.html'">Ver todos os eventos →</button>
+  </div>
+  <div class="featured-cats">
+    <div class="feat-cat-card" id="featCard1"></div>
+    <div class="feat-cat-card" id="featCard2"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+  <div class="footer-brand">EVENTFLOW</div>
+  <div class="footer-links">
+    <button class="footer-link" onclick="window.location.href='eventflow_about.html'">Sobre</button>
+    <button class="footer-link" onclick="window.location.href='eventflow_terms.html'">Termos</button>
+    <button class="footer-link" onclick="window.location.href='eventflow_privacy.html'">Privacidade</button>
+    <button class="footer-link" onclick="window.location.href='eventflow_about.html'">Contacto</button>
+    <button class="footer-link" onclick="alert('Documentação API disponível em breve')">API</button>
+  </div>
+  <div class="footer-copy">© 2026 EventFlow · Moçambique</div>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/eventflow_categories.js"></script>
+</body>
+</html>

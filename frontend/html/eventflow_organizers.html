@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EventFlow — Organizadores de Eventos</title>
+<link rel="stylesheet" href="../css/eventflow_organizers.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="eventflow_homepage.html">
+    <div class="nav-logo">🎪</div>
+    <div class="nav-name">EVENTFLOW</div>
+  </a>
+  <div class="nav-links">
+    <button class="nav-link" onclick="window.location.href='eventflow_homepage.html'">Início</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_events.html'">Eventos</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_categories.html'">Categorias</button>
+    <button class="nav-link active">Organizadores</button>
+    <button class="nav-link" onclick="window.location.href='eventflow_about.html'">Sobre</button>
+  </div>
+  <div class="nav-right">
+    <button class="notif-btn" onclick="window.location.href='eventflow_notifications.html'">🔔<span class="notif-dot"></span></button>
+    <button class="nav-btn btn-ghost" onclick="window.location.href='eventflow_login_register.html'">Entrar</button>
+    <button class="nav-btn btn-primary" onclick="window.location.href='eventflow_events.html'">Explorar</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <canvas id="bg" class="hero-canvas"></canvas>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge"><span class="hero-badge-dot"></span>58 Organizadores Verificados</div>
+      <div class="hero-title">OS MELHORES<br><span class="grad">ORGANIZADORES</span></div>
+      <div class="hero-sub">Descobre os criadores de experiências únicos por todo Moçambique. Segue os teus favoritos e nunca percas um evento.</div>
+      <div class="hero-actions">
+        <button class="ha-btn ha-primary" onclick="window.location.href='eventflow_login_register.html'">Tornar-me Organizador</button>
+        <button class="ha-btn ha-secondary" onclick="document.getElementById('orgGrid').scrollIntoView({behavior:'smooth'})">Ver Todos</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="top-org-card" id="topOrgCard"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-bar">
+  <div class="fb-search">
+    <span>🔍</span>
+    <input type="text" id="orgSearch" placeholder="Pesquisar organizador..." class="fb-input">
+  </div>
+  <div class="fb-filters">
+    <button class="fb-filter active" data-filter="todos">Todos</button>
+    <button class="fb-filter" data-filter="musica">🎵 Música</button>
+    <button class="fb-filter" data-filter="tech">💻 Tech</button>
+    <button class="fb-filter" data-filter="arte">🎨 Arte</button>
+    <button class="fb-filter" data-filter="desporto">⚽ Desporto</button>
+    <button class="fb-filter" data-filter="gastronomia">🍽️ Gastro</button>
+  </div>
+  <div class="fb-sort">
+    <select class="fb-select" id="orgSort">
+      <option value="rating">Melhor Avaliados</option>
+      <option value="events">Mais Eventos</option>
+      <option value="followers">Mais Seguidores</option>
+    </select>
+  </div>
+</div>
+
+<!-- FEATURED ORGANIZER -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">ORGANIZADOR EM <span>DESTAQUE</span></div>
+  </div>
+  <div class="featured-org" id="featuredOrg"></div>
+</div>
+
+<!-- ORGANIZERS GRID -->
+<div class="section" id="orgGrid">
+  <div class="section-header">
+    <div class="section-title">TODOS OS <span>ORGANIZADORES</span></div>
+    <div class="org-count" id="orgCount">8 organizadores</div>
+  </div>
+  <div class="orgs-grid" id="orgsGrid"></div>
+</div>
+
+<!-- BECOME ORGANIZER CTA -->
+<div class="cta-section">
+  <canvas id="bgCta" class="cta-canvas"></canvas>
+  <div class="cta-inner">
+    <div class="cta-badge">🚀 NOVA CONTA</div>
+    <div class="cta-title">TENS UM EVENTO PARA<br><span class="grad">ORGANIZAR?</span></div>
+    <div class="cta-sub">Cria a tua conta de organizador gratuitamente e começa a vender bilhetes hoje mesmo. Chega a milhares de pessoas em Moçambique.</div>
+    <div class="cta-actions">
+      <button class="ha-btn ha-primary" onclick="window.location.href='eventflow_login_register.html'">Criar Conta Gratuita</button>
+      <button class="ha-btn ha-secondary" onclick="window.location.href='eventflow_about.html'">Saber Mais</button>
+    </div>
+    <div class="cta-perks">
+      <div class="cta-perk">✓ Sem taxa de adesão</div>
+      <div class="cta-perk">✓ Dashboard completo</div>
+      <div class="cta-perk">✓ Pagamentos automáticos</div>
+      <div class="cta-perk">✓ Suporte 24/7</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+  <div class="footer-brand">EVENTFLOW</div>
+  <div class="footer-links">
+    <button class="footer-link" onclick="window.location.href='eventflow_about.html'">Sobre</button>
+    <button class="footer-link" onclick="window.location.href='eventflow_terms.html'">Termos</button>
+    <button class="footer-link" onclick="window.location.href='eventflow_privacy.html'">Privacidade</button>
+    <button class="footer-link" onclick="window.location.href='eventflow_about.html'">Contacto</button>
+    <button class="footer-link" onclick="alert('Documentação API disponível em breve')">API</button>
+  </div>
+  <div class="footer-copy">© 2026 EventFlow · Moçambique</div>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/eventflow_organizers.js"></script>
+</body>
+</html>

@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EventFlow — Dashboard Organizador</title>
+<link rel="stylesheet" href="../css/eventflow_organizer_dashboard.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="eventflow_homepage.html">
+    <div class="nav-logo">🎪</div>
+    <div class="nav-name">EVENTFLOW</div>
+  </a>
+  <div class="nav-badge">ORGANIZADOR</div>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="showSection('dashboard',this)">Dashboard</button>
+    <button class="nav-link" onclick="showSection('eventos',this)">Os Meus Eventos</button>
+    <button class="nav-link" onclick="showSection('bilhetes',this)">Bilhetes</button>
+    <button class="nav-link" onclick="showSection('financas',this)">Finanças</button>
+    <button class="nav-link" onclick="showSection('publico',this)">Público</button>
+  </div>
+  <div class="nav-right">
+    <button class="nav-cta" onclick="window.location.href='eventflow_create_event.html'">+ Criar Evento</button>
+    <button class="notif-btn" onclick="window.location.href='eventflow_notifications.html'">🔔<span class="notif-dot"></span></button>
+    <div class="nav-avatar" onclick="window.location.href='eventflow_profile.html'">ML</div>
+  </div>
+</nav>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- LAYOUT -->
+<div class="org-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-org">
+      <div class="sb-logo">🎵</div>
+      <div class="sb-info">
+        <div class="sb-name">Mozambique Live</div>
+        <div class="sb-tag">✅ Verificado</div>
+        <div class="sb-rating">⭐ 4.9 · 12 eventos</div>
+      </div>
+    </div>
+    <nav class="sb-nav">
+      <button class="sb-link active" data-section="dashboard" onclick="showSection('dashboard',this)">
+        <span class="sbl-icon">📊</span>Dashboard
+      </button>
+      <button class="sb-link" data-section="eventos" onclick="showSection('eventos',this)">
+        <span class="sbl-icon">🎪</span>Os Meus Eventos
+        <span class="sbl-badge">4</span>
+      </button>
+      <button class="sb-link" data-section="bilhetes" onclick="showSection('bilhetes',this)">
+        <span class="sbl-icon">🎟️</span>Bilhetes Vendidos
+      </button>
+      <button class="sb-link" data-section="financas" onclick="showSection('financas',this)">
+        <span class="sbl-icon">💰</span>Finanças
+      </button>
+      <button class="sb-link" data-section="publico" onclick="showSection('publico',this)">
+        <span class="sbl-icon">👥</span>Público
+      </button>
+      <button class="sb-link" data-section="config" onclick="showSection('config',this)">
+        <span class="sbl-icon">⚙️</span>Definições
+      </button>
+    </nav>
+    <a class="sb-create-btn" href="eventflow_create_event.html">
+      <span>✦</span> CRIAR NOVO EVENTO
+    </a>
+    <button class="sb-logout" onclick="window.location.href='eventflow_profile.html'">
+      <span>👤</span>Conta de Utilizador
+    </button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- DASHBOARD -->
+    <div class="section-content" id="sec-dashboard">
+      <div class="content-header">
+        <div class="ch-left">
+          <div class="ch-title">Dashboard</div>
+          <div class="ch-sub">Bem-vindo, Mozambique Live! Aqui está o resumo da tua atividade.</div>
+        </div>
+        <div class="ch-right">
+          <select class="period-select" onchange="loadDashboardData()">
+            <option>Últimos 30 dias</option>
+            <option>Últimos 7 dias</option>
+            <option>Este ano</option>
+            <option>Todo o tempo</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- KPI STATS -->
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:rgba(255,60,172,0.1);color:var(--pink)">🎪</div>
+          <div class="kpi-body">
+            <div class="kpi-num">4</div>
+            <div class="kpi-lbl">Eventos Ativos</div>
+          </div>
+          <div class="kpi-delta up">+1 este mês</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:rgba(43,134,197,0.1);color:var(--blue)">🎟️</div>
+          <div class="kpi-body">
+            <div class="kpi-num" id="kpiTickets">1.847</div>
+            <div class="kpi-lbl">Bilhetes Vendidos</div>
+          </div>
+          <div class="kpi-delta up">+12% vs mês anterior</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:rgba(0,214,143,0.1);color:#00d68f">💰</div>
+          <div class="kpi-body">
+            <div class="kpi-num">MT 284K</div>
+            <div class="kpi-lbl">Receita Total</div>
+          </div>
+          <div class="kpi-delta up">+8% vs mês anterior</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:rgba(255,140,0,0.1);color:#ff8c00">⭐</div>
+          <div class="kpi-body">
+            <div class="kpi-num">4.9</div>
+            <div class="kpi-lbl">Avaliação Média</div>
+          </div>
+          <div class="kpi-delta up">+0.2 vs antes</div>
+        </div>
+      </div>
+
+      <!-- CHART + EVENTS -->
+      <div class="dash-main-grid">
+        <!-- Revenue Chart -->
+        <div class="dash-block">
+          <div class="db-header">
+            <div class="db-title">RECEITA MENSAL</div>
+            <div class="db-subtitle">Últimos 6 meses</div>
+          </div>
+          <div class="chart-area" id="revenueChart"></div>
+        </div>
+
+        <!-- Active Events -->
+        <div class="dash-block">
+          <div class="db-header">
+            <div class="db-title">EVENTOS ATIVOS</div>
+            <a class="db-link" onclick="showSection('eventos', document.querySelector('[data-section=eventos]'))">Ver todos →</a>
+          </div>
+          <div id="activeEventsList"></div>
+        </div>
+      </div>
+
+      <!-- RECENT ORDERS + TOP TICKET -->
+      <div class="dash-secondary-grid">
+        <div class="dash-block">
+          <div class="db-header">
+            <div class="db-title">VENDAS RECENTES</div>
+            <a class="db-link" onclick="showSection('bilhetes', document.querySelector('[data-section=bilhetes]'))">Ver todas →</a>
+          </div>
+          <div id="recentOrders"></div>
+        </div>
+        <div class="dash-block">
+          <div class="db-header">
+            <div class="db-title">TIPOS DE BILHETE</div>
+            <div class="db-subtitle">Distribuição por tipo</div>
+          </div>
+          <div id="ticketDistribution"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EVENTOS -->
+    <div class="section-content hidden" id="sec-eventos">
+      <div class="content-header">
+        <div class="ch-left">
+          <div class="ch-title">Os Meus Eventos</div>
+          <div class="ch-sub">Gere todos os teus eventos num só lugar</div>
+        </div>
+        <a class="ch-cta" href="eventflow_create_event.html">+ Novo Evento</a>
+      </div>
+      <div class="events-filter-bar">
+        <button class="ef-btn active" data-ef="todos" onclick="filterEvents('todos',this)">Todos (12)</button>
+        <button class="ef-btn" data-ef="ativo" onclick="filterEvents('ativo',this)">Ativos (4)</button>
+        <button class="ef-btn" data-ef="rascunho" onclick="filterEvents('rascunho',this)">Rascunhos (2)</button>
+        <button class="ef-btn" data-ef="passado" onclick="filterEvents('passado',this)">Passados (6)</button>
+        <div class="ef-spacer"></div>
+        <input class="ef-search" type="text" placeholder="🔍  Pesquisar eventos..." oninput="searchEvents(this.value)">
+      </div>
+      <div class="events-grid" id="eventsGrid"></div>
+    </div>
+
+    <!-- BILHETES -->
+    <div class="section-content hidden" id="sec-bilhetes">
+      <div class="content-header">
+        <div class="ch-left">
+          <div class="ch-title">Bilhetes Vendidos</div>
+          <div class="ch-sub">Todos os bilhetes vendidos nos teus eventos</div>
+        </div>
+        <button class="ch-cta" onclick="showToast('A exportar CSV...')">⬇ Exportar CSV</button>
+      </div>
+      <div class="tickets-stats-row">
+        <div class="ts-card"><div class="ts-num">1.847</div><div class="ts-lbl">Total Vendidos</div></div>
+        <div class="ts-card"><div class="ts-num">89%</div><div class="ts-lbl">Taxa de Ocupação</div></div>
+        <div class="ts-card"><div class="ts-num">MT 154</div><div class="ts-lbl">Ticket Médio</div></div>
+        <div class="ts-card"><div class="ts-num">12</div><div class="ts-lbl">Cancelamentos</div></div>
+      </div>
+      <div class="tickets-table-wrap">
+        <table class="tickets-table">
+          <thead>
+            <tr><th>Comprador</th><th>Evento</th><th>Tipo</th><th>Data Compra</th><th>Valor</th><th>Estado</th></tr>
+          </thead>
+          <tbody id="ticketsTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FINANÇAS -->
+    <div class="section-content hidden" id="sec-financas">
+      <div class="content-header">
+        <div class="ch-left">
+          <div class="ch-title">Finanças</div>
+          <div class="ch-sub">Receitas, pagamentos e relatórios financeiros</div>
+        </div>
+        <button class="ch-cta" onclick="showToast('A gerar relatório...')">📋 Relatório</button>
+      </div>
+      <div class="fin-stats-row">
+        <div class="fin-card big">
+          <div class="fin-icon">💰</div>
+          <div class="fin-num">MT 284.600</div>
+          <div class="fin-lbl">Receita Total (2025)</div>
+          <div class="fin-bar"><div class="fin-bar-fill" style="width:72%"></div></div>
+          <div class="fin-sub">72% da meta anual · MT 395K</div>
+        </div>
+        <div class="fin-card">
+          <div class="fin-icon">📈</div>
+          <div class="fin-num">MT 47.200</div>
+          <div class="fin-lbl">Este Mês</div>
+        </div>
+        <div class="fin-card">
+          <div class="fin-icon">⏳</div>
+          <div class="fin-num">MT 12.800</div>
+          <div class="fin-lbl">Pendente Pagamento</div>
+        </div>
+        <div class="fin-card">
+          <div class="fin-icon">🏦</div>
+          <div class="fin-num">MT 224.600</div>
+          <div class="fin-lbl">Já Recebido</div>
+        </div>
+      </div>
+      <div class="fin-grid">
+        <div class="dash-block">
+          <div class="db-header"><div class="db-title">RECEITA POR EVENTO</div></div>
+          <div id="revenueByEvent"></div>
+        </div>
+        <div class="dash-block">
+          <div class="db-header"><div class="db-title">MÉTODOS DE PAGAMENTO</div></div>
+          <div id="paymentMethods"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PÚBLICO -->
+    <div class="section-content hidden" id="sec-publico">
+      <div class="content-header">
+        <div class="ch-left">
+          <div class="ch-title">Público</div>
+          <div class="ch-sub">Conhece melhor quem frequenta os teus eventos</div>
+        </div>
+      </div>
+      <div class="audience-grid">
+        <div class="dash-block">
+          <div class="db-header"><div class="db-title">DISTRIBUIÇÃO POR FAIXA ETÁRIA</div></div>
+          <div id="ageChart"></div>
+        </div>
+        <div class="dash-block">
+          <div class="db-header"><div class="db-title">DISTRIBUIÇÃO GEOGRÁFICA</div></div>
+          <div id="geoChart"></div>
+        </div>
+        <div class="dash-block">
+          <div class="db-header"><div class="db-title">CANAIS DE AQUISIÇÃO</div></div>
+          <div id="channelChart"></div>
+        </div>
+        <div class="dash-block">
+          <div class="db-header"><div class="db-title">PARTICIPANTES FREQUENTES</div></div>
+          <div id="topAttendees"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEFINIÇÕES -->
+    <div class="section-content hidden" id="sec-config">
+      <div class="content-header">
+        <div class="ch-left">
+          <div class="ch-title">Definições</div>
+          <div class="ch-sub">Gere as informações da tua organização</div>
+        </div>
+      </div>
+      <div class="config-wrap">
+        <div class="config-block">
+          <div class="config-title">INFORMAÇÕES DA ORGANIZAÇÃO</div>
+          <div class="config-form">
+            <div class="cfg-row">
+              <div class="cfg-group"><label class="cfg-lbl">Nome da Organização</label><input class="cfg-input" type="text" value="Mozambique Live"></div>
+              <div class="cfg-group"><label class="cfg-lbl">Categoria</label>
+                <select class="cfg-input"><option>🎵 Música</option><option>🎨 Arte</option><option>💡 Tecnologia</option></select>
+              </div>
+            </div>
+            <div class="cfg-row">
+              <div class="cfg-group"><label class="cfg-lbl">Email de Contacto</label><input class="cfg-input" type="email" value="info@mozambiquelive.co.mz"></div>
+              <div class="cfg-group"><label class="cfg-lbl">Website</label><input class="cfg-input" type="text" value="mozambiquelive.co.mz"></div>
+            </div>
+            <div class="cfg-group full"><label class="cfg-lbl">Descrição</label>
+              <textarea class="cfg-input cfg-textarea">Mozambique Live é a principal empresa de produção de eventos musicais de Moçambique, especializada em festivais e concertos de grande escala.</textarea>
+            </div>
+            <button class="cfg-save" onclick="showToast('Informações atualizadas!')">GUARDAR ALTERAÇÕES →</button>
+          </div>
+        </div>
+        <div class="config-block">
+          <div class="config-title">DADOS BANCÁRIOS</div>
+          <div class="config-form">
+            <div class="cfg-row">
+              <div class="cfg-group"><label class="cfg-lbl">Banco</label><input class="cfg-input" type="text" value="BCI — Banco Comercial e de Investimentos"></div>
+              <div class="cfg-group"><label class="cfg-lbl">IBAN / NIB</label><input class="cfg-input" type="text" value="MZ59 0000 0000 0000 0000 000"></div>
+            </div>
+            <div class="cfg-group">
+              <label class="cfg-lbl">M-Pesa Business (nº)</label>
+              <input class="cfg-input" type="text" value="+258 84 000 0000">
+            </div>
+            <button class="cfg-save" onclick="showToast('Dados bancários atualizados!')">GUARDAR DADOS BANCÁRIOS →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/eventflow_organizer_dashboard.js"></script>
+</body>
+</html>
