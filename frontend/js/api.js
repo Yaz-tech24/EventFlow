@@ -4,8 +4,7 @@
  * Inclui este ficheiro ANTES do JS específico de cada página.
  */
 
-const API_BASE = 'http://localhost:3000/api';
-
+const API_BASE = 'https://eventflow-ib5n.onrender.com';
 // ── Token storage ─────────────────────────────────────────────────────
 const Auth = {
   getToken:    ()  => localStorage.getItem('ef_token'),
