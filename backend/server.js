@@ -20,10 +20,22 @@ if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
 app.use(helmet({ contentSecurityPolicy: false }));
 
 // ── CORS ──────────────────────────────────────────────────────────────
-const allowedOrigins = process.env.ALLOWED_ORIGINS
+const allowedOrigins = process.env.ALLOWED_ORIGINS 
   ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim())
-  : ['http://localhost:3000', 'http://localhost:5500', 'http://127.0.0.1:5500'];
+  : ['http://localhost:5500', 'http://127.0.0.1:5500'];
 
+app.use(cors({
+  origin: function(origin, callback) {
+    // Permite requests sem origin (ex: Postman, mobile)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    console.error('CORS bloqueado para origem:', origin);
+    return callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true
+}));
 app.use(cors({
   origin: (origin, callback) => {
     // Allow server-to-server requests (no browser origin header)
